@@ -1,0 +1,6 @@
+@BrowserArcade.Api_HostAddress = http://localhost:5245
+
+GET {{BrowserArcade.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
