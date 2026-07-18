@@ -1,0 +1,30 @@
+<div class="text-center bg-indigo-950 pt-10 min-h-screen">
+  <h1 class="text-4xl mb-8 text-neutral-200">Memory game</h1>
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
+    <p class="heading text-3xl text-neutral-200 mb-5">Instructions</p>
+    <p class="font-sans text-neutral-300 mb-5">
+      Click on a square to reveal a technology. Find its match in the grid. The game is finished
+      once all squares are matched.
+    </p>
+    <div>
+      <p class="font-sans text-neutral-300 mb-5">
+        Choose the size of the grid for the game. Then click on 'Start game' to test your memory!
+      </p>
+      <form method="get" class="space-y-2">
+        <div class="flex items-center justify-center space-x-2">
+          <input type="radio" name="amount" value="8" checked />
+          <label class="font-sans text-neutral-300" for="html">4x4 (small)</label>
+        </div>
+        <div class="flex items-center justify-center space-x-2">
+          <input type="radio" name="amount" value="18" />
+          <label class="font-sans text-neutral-300" for="html">6x6 (medium)</label>
+        </div>
+        <button
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >
+          Start game
+        </button>
+      </form>
+    </div>
+  </section>
+</div>
