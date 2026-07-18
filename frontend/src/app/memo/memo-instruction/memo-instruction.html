@@ -10,21 +10,23 @@
       <p class="font-sans text-neutral-300 mb-5">
         Choose the size of the grid for the game. Then click on 'Start game' to test your memory!
       </p>
-      <form method="get" class="space-y-2">
+      <section class="space-y-2">
         <div class="flex items-center justify-center space-x-2">
-          <input type="radio" name="amount" value="8" checked />
+          <input [(ngModel)]="amountInput" type="radio" value="8" checked />
           <label class="font-sans text-neutral-300" for="html">4x4 (small)</label>
         </div>
         <div class="flex items-center justify-center space-x-2">
-          <input type="radio" name="amount" value="18" />
+          <input [(ngModel)]="amountInput" type="radio" value="18" />
           <label class="font-sans text-neutral-300" for="html">6x6 (medium)</label>
         </div>
-        <button
+        <a
+          routerLink="../play"
           class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+          (click)="service.saveBoardSize(amountInput)"
         >
           Start game
-        </button>
-      </form>
+        </a>
+      </section>
     </div>
   </section>
 </div>

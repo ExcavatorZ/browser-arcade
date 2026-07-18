@@ -1,0 +1,18 @@
+<div class="text-center bg-indigo-950 pt-10 min-h-screen">
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
+    <div class="flex items-center justify-center">
+      <section>
+        <div class="grid grid-cols-4 gap-4">
+          @for (pic of pics; track $index) {
+            <section class="card h-24 w-24 cursor-pointer">
+              <div class="card-inner">
+                <img src="assets/generic/card-hidden.png" class="card-front" />
+                <img src="pic" class="card-back bg-white" />
+              </div>
+            </section>
+          }
+        </div>
+      </section>
+    </div>
+  </section>
+</div>
