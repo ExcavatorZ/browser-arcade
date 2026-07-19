@@ -5,6 +5,7 @@ import { MemoInstruction } from "./memo/memo-instruction/memo-instruction";
 import { MemoPlay } from "./memo/memo-play/memo-play";
 import { SnakeInstruction } from "./snake/snake-instruction/snake-instruction";
 import { SnakePlay } from "./snake/snake-play/snake-play";
+import { InvaderInstruction } from "./invader/invader-instruction/invader-instruction";
 
 export const routes: Routes = [
   {
@@ -44,6 +45,16 @@ export const routes: Routes = [
         path: "play",
         component: SnakePlay,
         title: "Debugger | Browser Arcade",
+      },
+    ],
+  },
+  {
+    path: "invader",
+    children: [
+      {
+        path: "",
+        component: InvaderInstruction,
+        title: "Server Invacders | Browser Arcade",
       },
     ],
   },
