@@ -1,0 +1,13 @@
+.snake-blue {
+  background-color: #4b8bbe;
+  border: #276ba3 1px solid;
+}
+
+.snake-yellow {
+  background-color: #ffd43b;
+  border: #ad8c15 1px solid;
+}
+
+.bug {
+  background-image: url("../../../assets/snake/bug.png");
+}
