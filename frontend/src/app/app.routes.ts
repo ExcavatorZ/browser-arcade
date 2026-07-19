@@ -3,6 +3,7 @@ import { Homepage } from "./homepage/homepage";
 import { Games } from "./games/games";
 import { MemoInstruction } from "./memo/memo-instruction/memo-instruction";
 import { MemoPlay } from "./memo/memo-play/memo-play";
+import { SnakeInstruction } from "./snake/snake-instruction/snake-instruction";
 
 export const routes: Routes = [
   {
@@ -26,6 +27,16 @@ export const routes: Routes = [
       {
         path: "play",
         component: MemoPlay,
+        title: "Memory Game | Browser Arcade",
+      },
+    ],
+  },
+  {
+    path: "snake",
+    children: [
+      {
+        path: "",
+        component: SnakeInstruction,
         title: "Memory Game | Browser Arcade",
       },
     ],
