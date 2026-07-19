@@ -43,8 +43,8 @@ export class MemoService {
     return shuffled;
   }
 
-  saveBoardSize(amount: number) {
-    this.selectedBoardSize = amount;
+  saveBoardSize(amount: string) {
+    amount == "8" ? (this.selectedBoardSize = 8) : (this.selectedBoardSize = 18);
   }
 
   getBoardSize() {

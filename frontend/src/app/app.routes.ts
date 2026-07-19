@@ -17,12 +17,17 @@ export const routes: Routes = [
   },
   {
     path: "memo",
-    component: MemoInstruction,
-    title: "Memory Game | Browser Arcade",
-  },
-  {
-    path: "play",
-    component: MemoPlay,
-    title: "Memory Game | Browser Arcade",
+    children: [
+      {
+        path: "",
+        component: MemoInstruction,
+        title: "Memory Game | Browser Arcade",
+      },
+      {
+        path: "play",
+        component: MemoPlay,
+        title: "Memory Game | Browser Arcade",
+      },
+    ],
   },
 ];

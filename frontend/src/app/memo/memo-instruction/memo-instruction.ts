@@ -11,5 +11,5 @@ import { FormsModule } from "@angular/forms";
 export class MemoInstruction {
   service = inject(MemoService);
 
-  amountInput!: number;
+  amountInput = "8";
 }

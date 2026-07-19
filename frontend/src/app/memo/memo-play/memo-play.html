@@ -2,7 +2,11 @@
   <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
     <div class="flex items-center justify-center">
       <section>
-        <div class="grid grid-cols-4 gap-4">
+        <div
+          class="grid grid-cols-4 gap-4"
+          [class.grid-cols-4]="amount == 8"
+          [class.grid-cols-6]="amount == 18"
+        >
           @for (card of cards(); track card.id) {
             <section
               (click)="selectCard(card)"
