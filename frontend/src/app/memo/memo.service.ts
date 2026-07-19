@@ -1,38 +1,45 @@
 import { Injectable } from "@angular/core";
 
+interface pic {
+  id?: number;
+  image: string;
+  flipped: boolean;
+}
+
 @Injectable({
   providedIn: "root",
 })
 export class MemoService {
   private selectedBoardSize = 8;
 
-  private pics = [
-    "assets/memo/angular.png",
-    "assets/memo/aspnet.jpg",
-    "assets/memo/csharp.png",
-    "assets/memo/django.svg",
-    "assets/memo/docker.webp",
-    "assets/memo/express.webp",
-    "assets/memo/java.png",
-    "assets/memo/javascript.webp",
-    "assets/memo/kubernetes.png",
-    "assets/memo/laravel.png",
-    "assets/memo/mongo.png",
-    "assets/memo/node.png",
-    "assets/memo/php.png",
-    "assets/memo/postgresql.png",
-    "assets/memo/python.png",
-    "assets/memo/react.png",
-    "assets/memo/tailwind.png",
-    "assets/memo/typescript.png",
+  private pics: pic[] = [
+    { image: "assets/memo/angular.png", flipped: false },
+    { image: "assets/memo/aspnet.jpg", flipped: false },
+    { image: "assets/memo/csharp.png", flipped: false },
+    { image: "assets/memo/django.svg", flipped: false },
+    { image: "assets/memo/docker.webp", flipped: false },
+    { image: "assets/memo/express.webp", flipped: false },
+    { image: "assets/memo/java.png", flipped: false },
+    { image: "assets/memo/javascript.webp", flipped: false },
+    { image: "assets/memo/kubernetes.png", flipped: false },
+    { image: "assets/memo/laravel.png", flipped: false },
+    { image: "assets/memo/mongo.png", flipped: false },
+    { image: "assets/memo/node.png", flipped: false },
+    { image: "assets/memo/php.png", flipped: false },
+    { image: "assets/memo/postgresql.png", flipped: false },
+    { image: "assets/memo/python.png", flipped: false },
+    { image: "assets/memo/react.png", flipped: false },
+    { image: "assets/memo/tailwind.png", flipped: false },
+    { image: "assets/memo/typescript.png", flipped: false },
   ];
 
-  shuffle(array: string[]) {
+  shuffle(array: pic[]) {
     let shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const x = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[x]] = [shuffled[x], shuffled[i]];
     }
+
     return shuffled;
   }
 
@@ -46,9 +53,15 @@ export class MemoService {
 
   getPics() {
     const shuffledPics = this.shuffle(this.pics);
-    let copies = shuffledPics.slice(0, this.selectedBoardSize);
-    copies = copies.concat(copies);
+    let shuffledCopies = shuffledPics.slice(0, this.selectedBoardSize);
+    const cardObjects = [
+      ...shuffledCopies.map((card) => ({ ...card })),
+      ...shuffledCopies.map((card) => ({ ...card })),
+    ];
+    for (let i = 0; i < cardObjects.length; i++) {
+      cardObjects[i].id = i;
+    }
 
-    return this.shuffle(copies);
+    return this.shuffle(cardObjects);
   }
 }

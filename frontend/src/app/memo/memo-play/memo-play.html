@@ -3,15 +3,43 @@
     <div class="flex items-center justify-center">
       <section>
         <div class="grid grid-cols-4 gap-4">
-          @for (pic of pics; track $index) {
-            <section class="card h-24 w-24 cursor-pointer">
+          @for (card of cards(); track card.id) {
+            <section
+              (click)="selectCard(card)"
+              [class.flipped]="card.flipped"
+              class="card h-24 w-24 cursor-pointer"
+            >
               <div class="card-inner">
                 <img src="assets/generic/card-hidden.png" class="card-front" />
-                <img src="pic" class="card-back bg-white" />
+                <img [src]="card.image" class="card-back bg-white" />
               </div>
             </section>
           }
         </div>
+      </section>
+    </div>
+    <div
+      id="complete"
+      [class.hidden]="!completed()"
+      class="text-center mt-10 pt-6 border-t border-indigo-200"
+    >
+      <p class="font-sans text-xl text-neutral-300">
+        Well done! You completed the memory game. You took {{ gameCounter() }} total turns.
+      </p>
+      <section class="flex flex-col items-center">
+        <button
+          (click)="restart()"
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >
+          Restart
+        </button>
+
+        <a
+          routerLink="/games"
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >
+          Back to game list
+        </a>
       </section>
     </div>
   </section>
