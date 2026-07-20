@@ -2,12 +2,21 @@
   <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
     <div class="inline-block border-10 border-indigo-950 rounded-lg">
       <div id="board" class="bg-indigo-200 w-150 h-150 relative">
+        <div
+          class="player"
+          [style.top.px]="playerPositionY"
+          [style.left.px]="playerPositionX()"
+        ></div>
         @for (server of serverAmount(); track $index) {
-          <div class="server"></div>
+          <div class="server" [style.left.px]="server"></div>
         }
       </div>
     </div>
-    <p id="instruction" class="font-sans text-xl text-neutral-300 mb-8 font-semibold">
+    <p
+      id="instruction"
+      class="font-sans text-xl text-neutral-300 mb-8 font-semibold"
+      [class.hidden]="running()"
+    >
       Press left, right or spacebar to start the game.
     </p>
     <div id="complete" class="hidden text-center mt-10 pt-6 border-t border-indigo-200">
