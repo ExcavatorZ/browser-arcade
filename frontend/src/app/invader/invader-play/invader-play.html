@@ -10,20 +10,31 @@
         @for (server of serverAmount(); track $index) {
           <div class="server" [style.left.px]="server"></div>
         }
+        @for (enemy of enemies(); track $index) {
+          <div
+            class="enemy"
+            [style.left.px]="enemy.x"
+            [style.top.px]="enemy.y"
+            [style.background-image]="enemy.bg"
+          ></div>
+        }
       </div>
     </div>
     <p
       id="instruction"
       class="font-sans text-xl text-neutral-300 mb-8 font-semibold"
-      [class.hidden]="running()"
+      [class.hidden]="running() || finished()"
     >
       Press left, right or spacebar to start the game.
     </p>
-    <div id="complete" class="hidden text-center mt-10 pt-6 border-t border-indigo-200">
-      <p class="font-sans text-xl text-neutral-300">
-        Server compromised! You blocked <span id="score"></span> malware.
-      </p>
+    <div
+      id="complete"
+      class="text-center mt-10 pt-6 border-t border-indigo-200"
+      [class.hidden]="!finished()"
+    >
+      <p class="font-sans text-xl text-neutral-300">Server compromised! You blocked 0 malware.</p>
       <button
+        (click)="restart()"
         class="px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
       >
         Restart

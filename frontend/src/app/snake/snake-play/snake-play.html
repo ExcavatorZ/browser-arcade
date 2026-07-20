@@ -16,7 +16,7 @@
     <p
       id="instruction"
       class="font-sans text-xl text-neutral-300 mb-8 font-semibold"
-      [class.hidden]="running()"
+      [class.hidden]="running() || finished()"
     >
       Press any arrow key to start the game.
     </p>
