@@ -18,6 +18,9 @@
             [style.background-image]="enemy.bg"
           ></div>
         }
+        @for (p of projectiles(); track $index) {
+          <div class="projectile" [style.left.px]="p.x" [style.top.px]="p.y"></div>
+        }
       </div>
     </div>
     <p

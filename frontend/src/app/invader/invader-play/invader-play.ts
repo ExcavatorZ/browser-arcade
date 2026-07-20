@@ -6,6 +6,11 @@ interface enemy {
   bg: string;
 }
 
+interface projectile {
+  x: number;
+  y: number;
+}
+
 @Component({
   selector: "app-invader-play",
   imports: [],
@@ -24,6 +29,9 @@ export class InvaderPlay {
   gameSpeedDelay = signal(190);
   enemies = signal<enemy[]>([]);
   finished = signal(false);
+  projectiles = signal<projectile[]>([]);
+  projectileSpeedDelay = 10;
+  projectileInterval: null | number = null;
 
   enemyImages = [
     "assets/invader/virus_green.png",
@@ -89,9 +97,75 @@ export class InvaderPlay {
     if (!this.running()) {
       this.running.set(true);
       this.generateEnemies();
+      this.projectileInterval = setInterval(() => {
+        this.moveProjectiles();
+      }, this.projectileSpeedDelay);
     } else if (event.key != " ") {
       this.movePlayer(event.key);
+    } else {
+      this.fire();
     }
+  };
+
+  moveProjectiles = () => {
+    this.projectiles.update((projectiles) =>
+      projectiles
+        .map((projectile) => ({
+          ...projectile,
+          y: projectile.y - 5,
+        }))
+        .filter((projectile) => projectile.y >= 0),
+    );
+    this.checkProjectileCollisions();
+  };
+
+  fire = () => {
+    if (this.projectiles().length >= 3) {
+      return;
+    }
+
+    const generated: projectile[] = [...this.projectiles()];
+
+    const currentProjectilePositionX = this.playerPositionX() + 15;
+    const currentProjectilePositionY = this.playerPositionY;
+
+    generated.push({ x: currentProjectilePositionX, y: currentProjectilePositionY });
+    this.projectiles.set(generated);
+  };
+
+  checkProjectileCollisions = () => {
+    const hitProjectiles: projectile[] = [];
+
+    for (let i = 0; i < this.projectiles().length; i++) {
+      if (this.checkCollision(this.projectiles()[i].x, this.projectiles()[i].y)) {
+        hitProjectiles.push(this.projectiles()[i]);
+      }
+    }
+
+    this.projectiles.update((projectiles) =>
+      projectiles.filter((projectile) => !hitProjectiles.includes(projectile)),
+    );
+  };
+
+  checkCollision = (projectileX: number, projectileY: number) => {
+    for (let i = 0; i < this.enemies().length; i++) {
+      if (
+        projectileX + 30 > this.enemies()[i].x &&
+        projectileX - 30 < this.enemies()[i].x &&
+        projectileY + 30 > this.enemies()[i].y &&
+        projectileY - 30 < this.enemies()[i].y
+      ) {
+        this.enemies.update((enemies) => enemies.filter((enemy) => enemy != enemies[i]));
+        if (this.enemies().length == 0) {
+          this.enemyCounter++;
+          this.gameSpeedDelay.set(this.gameSpeedDelay() - 10);
+          clearInterval(this.gameInterval!);
+          this.generateEnemies();
+        }
+        return true;
+      }
+    }
+    return false;
   };
 
   movePlayer = (key: string) => {
