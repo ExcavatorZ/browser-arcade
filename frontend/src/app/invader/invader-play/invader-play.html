@@ -1,0 +1,30 @@
+<div class="text-center bg-indigo-950 pt-10 min-h-screen">
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
+    <div class="inline-block border-10 border-indigo-950 rounded-lg">
+      <div id="board" class="bg-indigo-200 w-150 h-150 relative">
+        @for (server of serverAmount(); track $index) {
+          <div class="server"></div>
+        }
+      </div>
+    </div>
+    <p id="instruction" class="font-sans text-xl text-neutral-300 mb-8 font-semibold">
+      Press left, right or spacebar to start the game.
+    </p>
+    <div id="complete" class="hidden text-center mt-10 pt-6 border-t border-indigo-200">
+      <p class="font-sans text-xl text-neutral-300">
+        Server compromised! You blocked <span id="score"></span> malware.
+      </p>
+      <button
+        class="px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+      >
+        Restart
+      </button>
+
+      <button
+        class="px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+      >
+        Back to game list
+      </button>
+    </div>
+  </section>
+</div>

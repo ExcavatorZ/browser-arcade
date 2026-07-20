@@ -1,0 +1,39 @@
+.enemy {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.player {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-image: url("../../../assets/invader/flame.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.projectile {
+  position: relative;
+  width: 0.4rem;
+  height: 1rem;
+  background-color: orange;
+  border-radius: 9999px;
+  box-shadow: 0 0 6px orange;
+}
+
+.server {
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: 3rem;
+  background-image: url("../../../assets/invader/server.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
