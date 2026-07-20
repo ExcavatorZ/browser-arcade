@@ -35,19 +35,23 @@
       class="text-center mt-10 pt-6 border-t border-indigo-200"
       [class.hidden]="!finished()"
     >
-      <p class="font-sans text-xl text-neutral-300">Server compromised! You blocked 0 malware.</p>
-      <button
-        (click)="restart()"
-        class="px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
-      >
-        Restart
-      </button>
+      <p class="font-sans text-xl text-neutral-300">
+        Server compromised! You blocked {{ score() }} malware.
+      </p>
+      <section class="flex flex-col items-center">
+        <button
+          (click)="restart()"
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >
+          Restart
+        </button>
 
-      <button
-        class="px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
-      >
-        Back to game list
-      </button>
+        <a
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >
+          Back to game list
+        </a>
+      </section>
     </div>
   </section>
 </div>

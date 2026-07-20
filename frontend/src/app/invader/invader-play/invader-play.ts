@@ -32,6 +32,7 @@ export class InvaderPlay {
   projectiles = signal<projectile[]>([]);
   projectileSpeedDelay = 10;
   projectileInterval: null | number = null;
+  score = signal(0);
 
   enemyImages = [
     "assets/invader/virus_green.png",
@@ -156,6 +157,7 @@ export class InvaderPlay {
         projectileY - 30 < this.enemies()[i].y
       ) {
         this.enemies.update((enemies) => enemies.filter((enemy) => enemy != enemies[i]));
+        this.score.set(this.score() + 1);
         if (this.enemies().length == 0) {
           this.enemyCounter++;
           this.gameSpeedDelay.set(this.gameSpeedDelay() - 10);
