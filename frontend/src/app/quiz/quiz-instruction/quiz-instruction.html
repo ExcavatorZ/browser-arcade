@@ -6,32 +6,51 @@
       Every question will have 4 answers. Click on the correct answer to get a point. Try to get as
       many points as you can.
     </p>
+
+    <p class="font-sans text-neutral-300 mb-5">
+      Choose the amount of questions and the difficulty. Then click on 'Start game' to test your
+      knowledge!
+    </p>
     <section>
-      <p class="font-sans text-neutral-300 mb-5">
-        Choose the amount of questions and the difficulty. Then click on 'Start game' to test your
-        knowledge!
-      </p>
-      <input
-        type="number"
-        name="amount"
-        value="5"
-        min="5"
-        max="40"
-        step="5"
-        class="border border-2-black rounded font-sans bg-white"
-      />
-      <label class="font-sans text-neutral-300" for="html">Quiz length</label><br />
-      <input type="radio" name="difficulty" value="1" class="mt-4" />
-      <label class="font-sans text-neutral-300" for="html">Beginner</label><br />
-      <input type="radio" name="difficulty" value="2" checked />
-      <label class="font-sans text-neutral-300" for="html">Intermediate</label><br />
-      <input type="radio" name="difficulty" value="3" />
-      <label class="font-sans text-neutral-300" for="html">Advanced</label><br />
-      <a
-        class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
-        >Start game</a
-      >
+      <div class="flex items-center justify-center space-x-1">
+        <input
+          [(ngModel)]="amountInput"
+          type="number"
+          name="amount"
+          value="5"
+          min="5"
+          max="40"
+          step="5"
+          class="border border-2-black rounded font-sans bg-white"
+        />
+        <label class="font-sans text-neutral-300">Quiz length</label>
+      </div>
+      <div class="items-center justify-center space-x-1">
+        <input
+          [(ngModel)]="difficultyInput"
+          type="radio"
+          name="difficulty"
+          value="1"
+          class="mt-4"
+        />
+        <label class="font-sans text-neutral-300">Beginner</label>
+      </div>
+      <div class="flex items-center justify-center space-x-1">
+        <input [(ngModel)]="difficultyInput" type="radio" name="difficulty" value="2" checked />
+        <label class="font-sans text-neutral-300">Intermediate</label>
+      </div>
+      <div class="flex items-center justify-center space-x-1">
+        <input [(ngModel)]="difficultyInput" type="radio" name="difficulty" value="3" />
+        <label class="font-sans text-neutral-300">Advanced</label>
+      </div>
+      <div class="flex items-center justify-center space-x-2">
+        <a
+          routerLink="play"
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+          (click)="service.saveQuizInfo(amountInput, difficultyInput)"
+          >Start game</a
+        >
+      </div>
     </section>
   </section>
-  <button (click)="testQuestions()">Test button</button>
 </div>

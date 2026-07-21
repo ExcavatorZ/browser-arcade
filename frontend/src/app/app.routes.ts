@@ -10,6 +10,7 @@ import { InvaderPlay } from "./invader/invader-play/invader-play";
 import { Login } from "./login/login/login";
 import { Signup } from "./login/signup/signup";
 import { QuizInstruction } from "./quiz/quiz-instruction/quiz-instruction";
+import { QuizPlay } from "./quiz/quiz-play/quiz-play";
 
 export const routes: Routes = [
   {
@@ -53,6 +54,11 @@ export const routes: Routes = [
       {
         path: "",
         component: QuizInstruction,
+        title: "Quiz | Browser Arcade",
+      },
+      {
+        path: "play",
+        component: QuizPlay,
         title: "Quiz | Browser Arcade",
       },
     ],

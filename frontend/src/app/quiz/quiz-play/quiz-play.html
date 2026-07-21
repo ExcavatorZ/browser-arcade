@@ -1,0 +1,61 @@
+<div class="text-center bg-indigo-950 pt-10 min-h-screen">
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
+    <p class="question text-xl text-neutral-300 mb-8 font-semibold">
+      {{ currentQuestion()!.question }}
+    </p>
+    <div class="space-y-4">
+      <section
+        class="font-sans cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
+        (click)="selectAnswer(currentQuestion()!.answer0)"
+      >
+        {{ currentQuestion()!.answer0 }}
+      </section>
+      <section
+        class="font-sans answer cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
+        (click)="selectAnswer(currentQuestion()!.answer1)"
+      >
+        {{ currentQuestion()!.answer1 }}
+      </section>
+      <section
+        class="font-sans answer cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
+        (click)="selectAnswer(currentQuestion()!.answer2)"
+      >
+        {{ currentQuestion()!.answer2 }}
+      </section>
+      <section
+        class="font-sans answer cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
+        (click)="selectAnswer(currentQuestion()!.answer3)"
+      >
+        {{ currentQuestion()!.answer3 }}
+      </section>
+    </div>
+    <div class="mt-4">
+      <button
+        class="heading px-4 py-2 mt-4 bg-blue-600 text-neutral-200 font-medium rounded hover:bg-blue-700 cursor-pointer"
+        [class.hidden]="!answered() || completed()"
+        (click)="renderQuestion()"
+      >
+        Next Question
+      </button>
+    </div>
+    <div class="text-center mt-10 pt-6 border-t border-indigo-200" [class.hidden]="!completed()">
+      <p class="font-sans text-xl text-neutral-300">
+        You finished the quiz. You got {{ score() }} out of {{ questions.length }} correct.
+      </p>
+      <button
+        (click)="restart()"
+        class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+      >
+        Restart
+      </button>
+      <form asp-controller="Games" asp-action="Index">
+        <button
+          type="submit"
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >
+          Back to game list
+        </button>
+      </form>
+    </div>
+  </section>
+</div>

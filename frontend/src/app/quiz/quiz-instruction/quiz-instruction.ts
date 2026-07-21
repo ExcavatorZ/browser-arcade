@@ -1,17 +1,16 @@
 import { Component, inject } from "@angular/core";
 import { QuizService } from "../quiz.service";
+import { RouterLink } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-quiz-instruction",
-  imports: [],
+  imports: [RouterLink, FormsModule],
   templateUrl: "./quiz-instruction.html",
 })
 export class QuizInstruction {
   service = inject(QuizService);
 
-  testQuestions = () => {
-    this.service.getQuestions(5, 1).subscribe((response) => {
-      console.log(response);
-    });
-  };
+  amountInput = "10";
+  difficultyInput = "2";
 }
