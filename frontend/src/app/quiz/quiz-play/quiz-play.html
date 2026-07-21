@@ -4,30 +4,15 @@
       {{ currentQuestion()!.question }}
     </p>
     <div class="space-y-4">
-      <section
-        class="font-sans cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
-        (click)="selectAnswer(currentQuestion()!.answer0)"
-      >
-        {{ currentQuestion()!.answer0 }}
-      </section>
-      <section
-        class="font-sans answer cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
-        (click)="selectAnswer(currentQuestion()!.answer1)"
-      >
-        {{ currentQuestion()!.answer1 }}
-      </section>
-      <section
-        class="font-sans answer cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
-        (click)="selectAnswer(currentQuestion()!.answer2)"
-      >
-        {{ currentQuestion()!.answer2 }}
-      </section>
-      <section
-        class="font-sans answer cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
-        (click)="selectAnswer(currentQuestion()!.answer3)"
-      >
-        {{ currentQuestion()!.answer3 }}
-      </section>
+      @for (answer of choices(); track $index) {
+        <section
+          class="font-sans cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
+          [class]="getAnswerClass($index, answer)"
+          (click)="selectAnswer(answer)"
+        >
+          {{ answer }}
+        </section>
+      }
     </div>
     <div class="mt-4">
       <button
@@ -42,20 +27,20 @@
       <p class="font-sans text-xl text-neutral-300">
         You finished the quiz. You got {{ score() }} out of {{ questions.length }} correct.
       </p>
-      <button
-        (click)="restart()"
-        class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
-      >
-        Restart
-      </button>
-      <form asp-controller="Games" asp-action="Index">
+      <section class="flex flex-col items-center">
         <button
-          type="submit"
+          (click)="restart()"
+          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >
+          Restart
+        </button>
+        <a
+          routerLink="/games"
           class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
         >
           Back to game list
-        </button>
-      </form>
+        </a>
+      </section>
     </div>
   </section>
 </div>
