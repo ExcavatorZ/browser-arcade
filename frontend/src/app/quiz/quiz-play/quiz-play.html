@@ -7,10 +7,10 @@
       @for (answer of choices(); track $index) {
         <section
           class="font-sans cursor-pointer border-2 border-indigo-500 rounded-lg p-4 hover:scale-[1.02] active:scale-[0.98] transition"
-          [class]="getAnswerClass($index, answer)"
+          [class]="getAnswerClass(answer)"
           (click)="selectAnswer(answer)"
         >
-          {{ answer }}
+          {{ answer.text }}
         </section>
       }
     </div>
