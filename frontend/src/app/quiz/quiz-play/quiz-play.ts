@@ -22,13 +22,7 @@ export class QuizPlay implements OnInit {
   progress = signal(0);
 
   ngOnInit(): void {
-    const amount = this.service.amount;
-    const difficulty = this.service.difficulty;
-
-    this.service.getQuestions(amount, difficulty).subscribe((response) => {
-      this.questions = response;
-      this.renderQuestion();
-    });
+    this.loadQuestions();
   }
 
   // Gameplay logic
@@ -38,6 +32,15 @@ export class QuizPlay implements OnInit {
   answered = signal(false);
   correct = signal(false);
   choices = signal<answerOption[]>([]);
+
+  loadQuestions = () => {
+    this.service
+      .getQuestions(this.service.amount, this.service.difficulty)
+      .subscribe((response) => {
+        this.questions = response;
+        this.renderQuestion();
+      });
+  };
 
   selectAnswer = (answer: answerOption) => {
     if (this.answered()) {
@@ -103,6 +106,10 @@ export class QuizPlay implements OnInit {
   };
 
   restart = () => {
-    location.reload();
+    this.score.set(0);
+    this.progress.set(0);
+    this.completed.set(false);
+    this.answered.set(false);
+    this.loadQuestions();
   };
 }
