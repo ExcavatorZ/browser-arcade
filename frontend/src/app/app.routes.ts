@@ -9,6 +9,7 @@ import { InvaderInstruction } from "./invader/invader-instruction/invader-instru
 import { InvaderPlay } from "./invader/invader-play/invader-play";
 import { Login } from "./login/login/login";
 import { Signup } from "./login/signup/signup";
+import { QuizInstruction } from "./quiz/quiz-instruction/quiz-instruction";
 
 export const routes: Routes = [
   {
@@ -43,6 +44,16 @@ export const routes: Routes = [
         path: "play",
         component: MemoPlay,
         title: "Memory Game | Browser Arcade",
+      },
+    ],
+  },
+  {
+    path: "quiz",
+    children: [
+      {
+        path: "",
+        component: QuizInstruction,
+        title: "Quiz | Browser Arcade",
       },
     ],
   },

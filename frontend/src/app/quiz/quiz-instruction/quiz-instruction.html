@@ -1,0 +1,36 @@
+<div class="text-center bg-indigo-950 pt-10 min-h-screen">
+  <h1 class="text-4xl mb-8 text-neutral-200">Quiz</h1>
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
+    <p class="heading text-3xl text-neutral-200 mb-5">Instructions</p>
+    <p class="font-sans text-neutral-300 mb-5">
+      Every question will have 4 answers. Click on the correct answer to get a point. Try to get as
+      many points as you can.
+    </p>
+    <section>
+      <p class="font-sans text-neutral-300 mb-5">
+        Choose the amount of questions and the difficulty. Then click on 'Start game' to test your
+        knowledge!
+      </p>
+      <input
+        type="number"
+        name="amount"
+        value="5"
+        min="5"
+        max="40"
+        step="5"
+        class="border border-2-black rounded font-sans bg-white"
+      />
+      <label class="font-sans text-neutral-300" for="html">Quiz length</label><br />
+      <input type="radio" name="difficulty" value="1" class="mt-4" />
+      <label class="font-sans text-neutral-300" for="html">Beginner</label><br />
+      <input type="radio" name="difficulty" value="2" checked />
+      <label class="font-sans text-neutral-300" for="html">Intermediate</label><br />
+      <input type="radio" name="difficulty" value="3" />
+      <label class="font-sans text-neutral-300" for="html">Advanced</label><br />
+      <a
+        class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >Start game</a
+      >
+    </section>
+  </section>
+</div>
