@@ -8,6 +8,7 @@ import { SnakePlay } from "./snake/snake-play/snake-play";
 import { InvaderInstruction } from "./invader/invader-instruction/invader-instruction";
 import { InvaderPlay } from "./invader/invader-play/invader-play";
 import { Login } from "./login/login/login";
+import { Signup } from "./login/signup/signup";
 
 export const routes: Routes = [
   {
@@ -24,6 +25,11 @@ export const routes: Routes = [
     path: "login",
     component: Login,
     title: "Login | Browser Arcade",
+  },
+  {
+    path: "signup",
+    component: Signup,
+    title: "Sign up | Browser Arcade",
   },
   {
     path: "memo",

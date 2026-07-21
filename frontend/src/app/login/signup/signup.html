@@ -1,0 +1,47 @@
+<div class="text-center bg-indigo-950 pt-10 min-h-screen">
+  <h1 class="text-4xl mb-8 text-neutral-200">Sign up</h1>
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
+    <p class="text-3xl font-sans text-neutral-300 mb-8">Create a new account:</p>
+    <form>
+      <div class="flex flex-col items-center justify-center">
+        <label class="text-2xl font-sans text-neutral-300"
+          >Username <span class="text-sm font-sans text-neutral-300">(5-20 characters)</span></label
+        >
+        <input
+          id="nameInput"
+          type="text"
+          class="heading border border-2-black p-1 bg-indigo-100 rounded"
+        />
+        <span id="nameSpan" class="text-sm font-sans text-gray-400">0 / 20</span>
+        <span
+          class="hidden mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded"
+        ></span>
+      </div>
+      <div class="flex flex-col items-center justify-center mt-4">
+        <label class="text-2xl font-sans text-neutral-300"
+          >Password <span class="text-sm font-sans text-neutral-300">(5-50 characters)</span></label
+        >
+        <input type="password" class="heading border border-black p-1 bg-indigo-100 rounded" />
+        <span
+          class="hidden mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded"
+        ></span>
+      </div>
+      <div class="flex flex-col items-center justify-center mt-4">
+        <label class="text-2xl font-sans text-neutral-300">Confirm Password</label>
+        <input
+          name="confirm"
+          type="password"
+          class="heading border border-black p-1 bg-indigo-100 rounded"
+        />
+        <span
+          class="hidden mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded"
+        ></span>
+      </div>
+      <button
+        class="heading px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer mt-8"
+      >
+        Sign up
+      </button>
+    </form>
+  </section>
+</div>
