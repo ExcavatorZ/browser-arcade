@@ -30,16 +30,16 @@
       <div class="flex flex-col items-center justify-center mt-4">
         <label class="text-2xl font-sans text-neutral-300">Email</label>
         <input
-          formControlName="emailInput"
+          formControlName="email"
           type="email"
           class="heading border border-2-black p-1 bg-indigo-100 rounded"
         />
-        @if (hasDisplayableError("emailInput")) {
-          @if (form.controls.emailInput.hasError("required")) {
+        @if (hasDisplayableError("email")) {
+          @if (form.controls.email.hasError("required")) {
             <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
               Please enter an email address.
             </aside>
-          } @else if (form.controls.emailInput.hasError("email")) {
+          } @else if (form.controls.email.hasError("email")) {
             <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
               Email address must be valid.
             </aside>

@@ -1,5 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AuthService } from "../../shared/auth-service";
 
 @Component({
   selector: "app-signup",
@@ -8,6 +9,7 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@
 })
 export class Signup {
   formBuilder = inject(FormBuilder);
+  service = inject(AuthService);
   isSubmitted = false;
 
   passwordMatchValidator = (control: AbstractControl) => {
@@ -24,7 +26,7 @@ export class Signup {
   form = this.formBuilder.group(
     {
       userName: ["", [Validators.required, Validators.minLength(5)]],
-      emailInput: ["", [Validators.required, Validators.email]],
+      email: ["", [Validators.required, Validators.email]],
       password: [
         "",
         [Validators.required, Validators.minLength(6), Validators.pattern(/(?=.*[^a-zA-Z0-9 ])/)],
@@ -36,8 +38,19 @@ export class Signup {
 
   onSubmit = () => {
     this.isSubmitted = true;
+
     if (this.form.valid) {
-      console.log("Submitted.");
+      this.service.createUser(this.form.value).subscribe({
+        next: (res: any) => {
+          if (res.succeeded) {
+            this.form.reset();
+            this.isSubmitted = false;
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     }
   };
 

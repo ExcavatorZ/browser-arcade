@@ -1,10 +1,10 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BrowserArcade.Api.Models
 {
-    public class AppDbContext(DbContextOptions options) : DbContext(options)
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<User>(options)
     {
-        public DbSet<User> Users {get; set;}
         public DbSet<QuizItem> QuizItems {get; set;}
         public DbSet<QuizGame> QuizGames {get; set;}
         public DbSet<MemoryGame> MemoryGames {get; set;}

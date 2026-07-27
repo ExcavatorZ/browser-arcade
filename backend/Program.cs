@@ -1,10 +1,12 @@
 using BrowserArcade.Api.Models;
+using BrowserArcade.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<QuizService>();
 
 builder.Services.AddControllers();
@@ -16,6 +18,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
         ?? throw new InvalidOperationException(
             "Missing DB connection string")));
+
+builder.Services
+    .AddIdentityCore<User>()
+    .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddCors(options =>
 {
