@@ -2,42 +2,90 @@
   <h1 class="text-4xl mb-8 text-neutral-200">Sign up</h1>
   <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
     <p class="text-3xl font-sans text-neutral-300 mb-8">Create a new account:</p>
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-col items-center justify-center">
         <label class="text-2xl font-sans text-neutral-300"
           >Username <span class="text-sm font-sans text-neutral-300">(5-20 characters)</span></label
         >
         <input
-          id="nameInput"
+          formControlName="userName"
           type="text"
           class="heading border border-2-black p-1 bg-indigo-100 rounded"
         />
-        <span id="nameSpan" class="text-sm font-sans text-gray-400">0 / 20</span>
-        <span
-          class="hidden mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded"
-        ></span>
+        <span id="nameSpan" class="text-sm font-sans text-gray-400"
+          >{{ form.controls.userName.value!.length }} / 20</span
+        >
+        @if (hasDisplayableError("userName")) {
+          @if (form.controls.userName.hasError("required")) {
+            <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+              Please enter a username.
+            </aside>
+          } @else if (form.controls.userName.hasError("minlength")) {
+            <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+              Username must be at least 5 characters.
+            </aside>
+          }
+        }
+      </div>
+      <div class="flex flex-col items-center justify-center mt-4">
+        <label class="text-2xl font-sans text-neutral-300">Email</label>
+        <input
+          formControlName="emailInput"
+          type="email"
+          class="heading border border-2-black p-1 bg-indigo-100 rounded"
+        />
+        @if (hasDisplayableError("emailInput")) {
+          @if (form.controls.emailInput.hasError("required")) {
+            <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+              Please enter an email address.
+            </aside>
+          } @else if (form.controls.emailInput.hasError("email")) {
+            <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+              Email address must be valid.
+            </aside>
+          }
+        }
       </div>
       <div class="flex flex-col items-center justify-center mt-4">
         <label class="text-2xl font-sans text-neutral-300"
-          >Password <span class="text-sm font-sans text-neutral-300">(5-50 characters)</span></label
+          >Password <span class="text-sm font-sans text-neutral-300">(5-30 characters)</span></label
         >
-        <input type="password" class="heading border border-black p-1 bg-indigo-100 rounded" />
-        <span
-          class="hidden mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded"
-        ></span>
+        <input
+          formControlName="password"
+          type="password"
+          class="heading border border-black p-1 bg-indigo-100 rounded"
+        />
+        @if (hasDisplayableError("password")) {
+          @if (form.controls.password.hasError("required")) {
+            <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+              Please enter a password.
+            </aside>
+          } @else if (form.controls.password.hasError("minlength")) {
+            <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+              Password must be at least 6 characters.
+            </aside>
+          } @else if (form.controls.password.hasError("pattern")) {
+            <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+              Password must contain at least one special character.
+            </aside>
+          }
+        }
       </div>
       <div class="flex flex-col items-center justify-center mt-4">
         <label class="text-2xl font-sans text-neutral-300">Confirm Password</label>
         <input
-          name="confirm"
+          formControlName="confirm"
           type="password"
           class="heading border border-black p-1 bg-indigo-100 rounded"
         />
-        <span
-          class="hidden mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded"
-        ></span>
+        @if (hasDisplayableError("confirm")) {
+          <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+            Password and confirm must match
+          </aside>
+        }
       </div>
       <button
+        type="submit"
         class="heading px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer mt-8"
       >
         Sign up

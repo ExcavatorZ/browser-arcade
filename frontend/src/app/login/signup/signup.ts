@@ -1,8 +1,48 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-signup",
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: "./signup.html",
 })
-export class Signup {}
+export class Signup {
+  formBuilder = inject(FormBuilder);
+  isSubmitted = false;
+
+  passwordMatchValidator = (control: AbstractControl) => {
+    const password = control.get("password");
+    const confirm = control.get("confirm");
+    if (password && confirm && password.value != confirm.value) {
+      confirm!.setErrors({ passwordMismatch: true });
+    } else {
+      confirm!.setErrors(null);
+    }
+    return null;
+  };
+
+  form = this.formBuilder.group(
+    {
+      userName: ["", [Validators.required, Validators.minLength(5)]],
+      emailInput: ["", [Validators.required, Validators.email]],
+      password: [
+        "",
+        [Validators.required, Validators.minLength(6), Validators.pattern(/(?=.*[^a-zA-Z0-9 ])/)],
+      ],
+      confirm: [""],
+    },
+    { validators: this.passwordMatchValidator },
+  );
+
+  onSubmit = () => {
+    this.isSubmitted = true;
+    if (this.form.valid) {
+      console.log("Submitted.");
+    }
+  };
+
+  hasDisplayableError = (controlName: string) => {
+    const control = this.form.get(controlName);
+    return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched));
+  };
+}
