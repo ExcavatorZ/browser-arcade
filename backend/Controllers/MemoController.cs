@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using BrowserArcade.Api.DTOs;
+using BrowserArcade.Api.Models;
 using BrowserArcade.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,13 @@ namespace BrowserArcade.Api.Controllers
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             _memoService.SaveResult(memoryGameDto, userId);
             return Ok();
+        }
+
+        [HttpGet("leaderboard")]
+        public async Task<IEnumerable<MemoryGame>> GetMemoLeaderboard(string boardSize)
+        {
+            IEnumerable<MemoryGame> result = _memoService.GetLeaderboard(boardSize);
+            return result; 
         }
     }
 }

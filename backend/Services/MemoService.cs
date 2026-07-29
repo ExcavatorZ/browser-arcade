@@ -1,5 +1,6 @@
 using BrowserArcade.Api.DTOs;
 using BrowserArcade.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrowserArcade.Api.Services
 {
@@ -26,5 +27,10 @@ namespace BrowserArcade.Api.Services
             _db.SaveChanges();
         }
 
+        public IEnumerable<MemoryGame> GetLeaderboard(string board)
+        {
+            IEnumerable<MemoryGame> memoGames = _db.MemoryGames.Where(memo => memo.BoardSize == board).Include(m => m.User).AsEnumerable().GroupBy(m => m.UserId).Select(m => m.OrderBy(g => g.Moves).First()).OrderBy(item => item.Moves).Take(10).ToList();
+            return memoGames;
+        }
     }
 }

@@ -11,6 +11,7 @@ import { Login } from "./login/login/login";
 import { Signup } from "./login/signup/signup";
 import { QuizInstruction } from "./quiz/quiz-instruction/quiz-instruction";
 import { QuizPlay } from "./quiz/quiz-play/quiz-play";
+import { MemoLeaderboard } from "./memo/memo-leaderboard/memo-leaderboard";
 
 export const routes: Routes = [
   {
@@ -44,6 +45,11 @@ export const routes: Routes = [
       {
         path: "play",
         component: MemoPlay,
+        title: "Memory Game | Browser Arcade",
+      },
+      {
+        path: "leaderboard",
+        component: MemoLeaderboard,
         title: "Memory Game | Browser Arcade",
       },
     ],

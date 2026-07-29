@@ -9,13 +9,23 @@ interface pic {
   flipped: boolean;
 }
 
+export interface MemoLeaderboardItem {
+  id: number;
+  moves: number;
+  boardSize: string;
+  date: string;
+  user: {
+    userName: string;
+  };
+}
+
 @Injectable({
   providedIn: "root",
 })
 export class MemoService {
   private selectedBoardSize = 8;
   private http = inject(HttpClient);
-  url = environment.apiBaseUrl + "/Memo/save";
+  url = environment.apiBaseUrl + "/Memo";
   service = inject(AuthService);
 
   private pics: pic[] = [
@@ -72,9 +82,15 @@ export class MemoService {
   }
 
   saveResult = (gameData: any) => {
-    this.http.post(this.url, { moves: gameData.moves, boardSize: gameData.boardSize }).subscribe({
-      next: () => {},
-      error: (err) => console.error(err),
-    });
+    this.http
+      .post(`${this.url}/save`, { moves: gameData.moves, boardSize: gameData.boardSize })
+      .subscribe({
+        next: () => {},
+        error: (err) => console.error(err),
+      });
+  };
+
+  getLeaderboard = (board: string) => {
+    return this.http.get<MemoLeaderboardItem[]>(`${this.url}/leaderboard?boardSize=${board}`);
   };
 }

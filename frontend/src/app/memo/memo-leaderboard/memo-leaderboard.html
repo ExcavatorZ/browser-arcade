@@ -1,0 +1,46 @@
+<div class="text-center bg-indigo-950 min-h-screen pt-10">
+  <h1 class="text-4xl mb-3 text-neutral-200">Memory game leaderboard</h1>
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10 mb-8">
+    <div class="space-x-4">
+      <a
+        (click)="applyFilter('4x4')"
+        [class.bg-blue-600]="selectedFilter() == '4x4'"
+        [class.bg-gray-600]="selectedFilter() != '4x4'"
+        class="cursor-pointer px-4 py-2 rounded text-neutral-200"
+        >4x4</a
+      >
+      <a
+        (click)="applyFilter('6x6')"
+        [class.bg-blue-600]="selectedFilter() == '6x6'"
+        [class.bg-gray-600]="selectedFilter() != '6x6'"
+        class="cursor-pointer px-4 py-2 rounded text-neutral-200"
+        >6x6</a
+      >
+    </div>
+  </section>
+  <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
+    <h1 class="text-3xl mb-3 text-neutral-200">{{ selectedFilter() }} leaderboard</h1>
+    <table class="w-full border-separate border-spacing-y-2">
+      <thead>
+        <tr class="text-2xl text-neutral-200">
+          <th class="text-left px-4 py-2">Rank</th>
+          <th class="text-center px-4 py-2">Player</th>
+          <th class="text-right px-4 py-2">Moves</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entry of leaderboard(); track entry.id; let i = $index) {
+          <tr class="bg-indigo-800/60 font-sans text-neutral-300">
+            <td class="text-left px-4 py-2">{{ i + 1 }}</td>
+            <td class="text-center px-4 py-2">
+              <a class="cursor-pointer hover:text-white hover:underline">{{
+                entry.user.userName
+              }}</a>
+            </td>
+            <td class="text-right px-4 py-2">{{ entry.moves }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</div>
