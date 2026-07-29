@@ -1,3 +1,4 @@
+using BrowserArcade.Api.DTOs;
 using BrowserArcade.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,4 +16,21 @@ public class QuizService
 
         return quizItems;
     }
+
+    public void SaveResult(QuizGameDto quizGameDto, string userId)
+        {
+            QuizGame quizGame = new QuizGame
+            {
+                Score = quizGameDto.Score,
+                TotalQuestions = quizGameDto.TotalQuestions,
+                Difficulty = quizGameDto.Difficulty,
+                TimeTaken = quizGameDto.TimeTaken,
+                Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
+                UserId = userId,
+                User = _db.Users.Find(userId)!
+            };
+
+            _db.QuizGames.Add(quizGame);
+            _db.SaveChanges();
+        }
 }

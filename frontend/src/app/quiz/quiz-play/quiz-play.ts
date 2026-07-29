@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from "@angular/core";
 import { QuizItem, QuizService } from "../quiz.service";
 import { CommonModule } from "@angular/common";
 import { RouterLink } from "@angular/router";
+import { AuthService } from "../../shared/auth-service";
 
 interface answerOption {
   text: string;
@@ -15,11 +16,13 @@ interface answerOption {
 })
 export class QuizPlay implements OnInit {
   service = inject(QuizService);
+  authService = inject(AuthService);
 
   questions: QuizItem[] = [];
   completed = signal(false);
   score = signal(0);
   progress = signal(0);
+  startTime = Date.now();
 
   ngOnInit(): void {
     this.loadQuestions();
@@ -79,7 +82,14 @@ export class QuizPlay implements OnInit {
 
   endGame = () => {
     this.completed.set(true);
-    console.log("Game ended.");
+    if (this.authService.loggedIn()) {
+      this.service.saveResult({
+        score: this.score(),
+        totalQuestions: this.progress(),
+        difficulty: this.questions[0].difficulty,
+        timeTaken: Math.floor((Date.now() - this.startTime) / 1000),
+      });
+    }
   };
 
   shuffle = (array: {}[]) => {

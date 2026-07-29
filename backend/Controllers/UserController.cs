@@ -1,4 +1,4 @@
-using BrowserArcade.Api.Models;
+using BrowserArcade.Api.DTOs;
 using BrowserArcade.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

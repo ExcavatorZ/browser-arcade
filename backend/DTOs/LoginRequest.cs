@@ -1,4 +1,4 @@
-namespace BrowserArcade.Api.Models
+namespace BrowserArcade.Api.DTOs
 {
     public class LoginRequest
     {

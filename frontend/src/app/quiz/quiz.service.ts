@@ -31,4 +31,18 @@ export class QuizService {
   getQuestions = (amount: string, difficulty: string) => {
     return this.http.get<QuizItem[]>(`${this.url}?amount=${amount}&difficulty=${difficulty}`);
   };
+
+  saveResult = (gameData: any) => {
+    this.http
+      .post(`${this.url}/save`, {
+        score: gameData.score,
+        totalQuestions: gameData.totalQuestions,
+        difficulty: gameData.difficulty,
+        timeTaken: gameData.timeTaken,
+      })
+      .subscribe({
+        next: () => {},
+        error: (err) => console.error(err),
+      });
+  };
 }

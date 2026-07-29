@@ -1,4 +1,7 @@
+using System.Security.Claims;
+using BrowserArcade.Api.DTOs;
 using BrowserArcade.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BrowserArcade.Api.Controllers
@@ -17,6 +20,15 @@ namespace BrowserArcade.Api.Controllers
         public async Task<IEnumerable<QuizItem>> GetQuizItems(int amount, int difficulty)
         {
             return await _quizService.GetQuestions(amount, difficulty);
+        }
+
+        [Authorize]
+        [HttpPost("save")]
+        public async Task<ActionResult> SaveMemoryGame([FromBody] QuizGameDto quizGameDto)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            _quizService.SaveResult(quizGameDto, userId);
+            return Ok();
         }
     }
 }
