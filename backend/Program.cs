@@ -14,6 +14,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<QuizService>();
 builder.Services.AddScoped<MemoService>();
 builder.Services.AddScoped<SnakeService>();
+builder.Services.AddScoped<InvaderService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

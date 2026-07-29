@@ -1,4 +1,6 @@
-import { Component, signal, HostListener } from "@angular/core";
+import { Component, signal, HostListener, inject } from "@angular/core";
+import { InvaderService } from "../invader.service";
+import { AuthService } from "../../shared/auth-service";
 
 interface enemy {
   x: number;
@@ -18,6 +20,9 @@ interface projectile {
   styleUrl: "./invader-play.css",
 })
 export class InvaderPlay {
+  service = inject(InvaderService);
+  authService = inject(AuthService);
+
   serverAmount = signal([120, 240, 360, 480]);
   running = signal(false);
   playerPositionY = 510;
@@ -194,7 +199,9 @@ export class InvaderPlay {
   };
 
   saveGame = () => {
-    console.log("Game ended.");
+    if (this.authService.loggedIn()) {
+      this.service.saveResult(this.score());
+    }
   };
 
   restart = () => {
