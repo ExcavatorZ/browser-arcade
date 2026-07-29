@@ -1,4 +1,7 @@
-<app-header />
+<app-header (modalOpened)="handleModal('open')" />
 <main>
   <router-outlet />
 </main>
+@if (modalOpened()) {
+  <app-logout-modal (exit)="handleModal('close')" />
+}

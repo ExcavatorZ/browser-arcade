@@ -1,0 +1,55 @@
+<div
+  id="logoutModal"
+  class="z-50 fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+  (click)="closeModal()"
+>
+  <section
+    class="w-full max-w-md bg-white rounded-lg shadow dark:bg-gray-700 mx-4 md:mx-0"
+    (click)="$event.stopPropagation()"
+  >
+    <div
+      class="sticky top-0 flex items-center justify-between p-4 border-b rounded-t bg-white dark:border-gray-600"
+    >
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Log out?</h3>
+      <button
+        type="button"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+        (click)="closeModal()"
+      >
+        <svg
+          class="w-6 h-6"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <div class="flex gap-2 p-3 justify-center">
+      <form>
+        <input hidden />
+        <button
+          class="px-4 py-2 bg-green-600 text-white font-medium rounded hover:bg-green-700 cursor-pointer"
+        >
+          Yes
+        </button>
+      </form>
+      <button
+        type="button"
+        class="px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-red-700 cursor-pointer"
+        (click)="closeModal()"
+      >
+        No
+      </button>
+    </div>
+  </section>
+</div>

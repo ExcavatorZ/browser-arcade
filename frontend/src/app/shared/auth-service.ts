@@ -20,4 +20,15 @@ export class AuthService {
   saveToken = (token: string) => {
     localStorage.setItem("token", token);
   };
+
+  getToken = () => {
+    return localStorage.getItem("token");
+  };
+
+  isLoggedIn = () => {
+    if (this.getToken()) {
+      return true;
+    }
+    return false;
+  };
 }
