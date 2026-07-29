@@ -12,4 +12,12 @@ export class AuthService {
   createUser = (formData: any) => {
     return this.http.post(`${this.url}/User/signup`, formData);
   };
+
+  loginUser = (formData: any) => {
+    return this.http.post(`${this.url}/User/login`, formData);
+  };
+
+  saveToken = (token: string) => {
+    localStorage.setItem("token", token);
+  };
 }

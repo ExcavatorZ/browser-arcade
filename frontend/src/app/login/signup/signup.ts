@@ -1,6 +1,8 @@
 import { Component, inject } from "@angular/core";
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AuthService } from "../../shared/auth-service";
+import { Router } from "@angular/router";
+import { switchMap } from "rxjs";
 
 @Component({
   selector: "app-signup",
@@ -10,6 +12,7 @@ import { AuthService } from "../../shared/auth-service";
 export class Signup {
   formBuilder = inject(FormBuilder);
   service = inject(AuthService);
+  router = inject(Router);
   isSubmitted = false;
 
   passwordMatchValidator = (control: AbstractControl) => {
@@ -40,17 +43,19 @@ export class Signup {
     this.isSubmitted = true;
 
     if (this.form.valid) {
-      this.service.createUser(this.form.value).subscribe({
-        next: (res: any) => {
-          if (res.succeeded) {
+      this.service
+        .createUser(this.form.value)
+        .pipe(switchMap(() => this.service.loginUser(this.form.value)))
+        .subscribe({
+          next: (res: any) => {
+            this.service.saveToken(res.token);
             this.form.reset();
-            this.isSubmitted = false;
-          }
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+            this.router.navigateByUrl("/");
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
     }
   };
 

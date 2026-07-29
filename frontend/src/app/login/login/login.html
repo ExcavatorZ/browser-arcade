@@ -2,22 +2,31 @@
   <h1 class="text-4xl mb-8 text-neutral-200">Login</h1>
   <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-10">
     <p class="text-3xl font-sans text-neutral-300 mb-8">Log in to your account:</p>
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-col items-center justify-center">
-        <label class="text-2xl font-sans text-neutral-300">Username</label>
-        <input type="text" class="heading border border-2-black p-1 bg-indigo-100 rounded" />
+        <label class="text-2xl font-sans text-neutral-300">Email</label>
+        <input
+          formControlName="email"
+          type="text"
+          class="heading border border-2-black p-1 bg-indigo-100 rounded"
+        />
         <span
           class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded empty:hidden"
         ></span>
       </div>
       <div class="flex flex-col items-center justify-center mt-4">
         <label class="text-2xl font-sans text-neutral-300">Password</label>
-        <input type="password" class="heading border border-2-black p-1 bg-indigo-100 rounded" />
+        <input
+          formControlName="password"
+          type="password"
+          class="heading border border-2-black p-1 bg-indigo-100 rounded"
+        />
         <span
           class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded empty:hidden"
         ></span>
       </div>
       <button
+        type="submit"
         class="heading px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer mt-8"
       >
         Login

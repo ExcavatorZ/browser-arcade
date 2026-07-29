@@ -19,5 +19,14 @@ namespace BrowserArcade.Api.Controllers
 
             return result;
         }
+
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<IResult> LoginUser([FromBody] LoginRequest request)
+        {
+            IResult result = await _userService.LoginUser(request.Email, request.Password);
+
+            return result;
+        }
     }
 }
