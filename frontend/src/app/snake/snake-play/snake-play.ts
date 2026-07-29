@@ -1,5 +1,6 @@
 import { Component, inject, signal, HostListener, OnInit } from "@angular/core";
 import { SnakeService } from "../snake.service";
+import { AuthService } from "../../shared/auth-service";
 
 @Component({
   selector: "app-snake-play",
@@ -9,6 +10,7 @@ import { SnakeService } from "../snake.service";
 })
 export class SnakePlay implements OnInit {
   service = inject(SnakeService);
+  authService = inject(AuthService);
 
   finished = signal(false);
   running = signal(false);
@@ -130,7 +132,9 @@ export class SnakePlay implements OnInit {
   };
 
   saveGame = () => {
-    console.log("Game ended.");
+    if (this.authService.loggedIn()) {
+      this.service.saveResult(this.score());
+    }
   };
 
   restart = () => {

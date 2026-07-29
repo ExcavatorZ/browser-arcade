@@ -24,7 +24,7 @@ namespace BrowserArcade.Api.Controllers
 
         [Authorize]
         [HttpPost("save")]
-        public async Task<ActionResult> SaveMemoryGame([FromBody] QuizGameDto quizGameDto)
+        public async Task<ActionResult> SaveQuizGame([FromBody] QuizGameDto quizGameDto)
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             _quizService.SaveResult(quizGameDto, userId);
