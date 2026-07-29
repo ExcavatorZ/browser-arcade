@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
+import { inject, Injectable, signal } from "@angular/core";
 import { environment } from "../../environments/environment.development";
 
 @Injectable({
@@ -18,6 +18,7 @@ export class AuthService {
   };
 
   saveToken = (token: string) => {
+    this.loggedIn.set(true);
     localStorage.setItem("token", token);
   };
 
@@ -26,13 +27,9 @@ export class AuthService {
   };
 
   deleteToken = () => {
+    this.loggedIn.set(false);
     localStorage.removeItem("token");
   };
 
-  isLoggedIn = () => {
-    if (this.getToken()) {
-      return true;
-    }
-    return false;
-  };
+  loggedIn = signal(this.getToken() != null);
 }

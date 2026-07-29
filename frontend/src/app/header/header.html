@@ -20,13 +20,13 @@
           </li>
         </ul>
         <div class="flex justify-end">
-          @if (!loggedIn()) {
+          @if (!service.loggedIn()) {
             <a
               routerLink="/login"
               class="heading text-neutral-200 p-2 border border-gray-700 rounded-md bg-gray-700"
               >LOGIN</a
             >
-          } @else if (loggedIn()) {
+          } @else if (service.loggedIn()) {
             <button
               (click)="openModal()"
               class="heading cursor-pointer text-neutral-200 p-2 border border-gray-700 rounded-md bg-gray-700"
