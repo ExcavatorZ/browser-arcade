@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
 import { MemoService } from "../memo.service";
 import { RouterLink } from "@angular/router";
+import { AuthService } from "../../shared/auth-service";
 
 interface pic {
   id?: number;
@@ -16,6 +17,7 @@ interface pic {
 })
 export class MemoPlay implements OnInit {
   service = inject(MemoService);
+  authService = inject(AuthService);
 
   amount!: number;
   cards = signal<pic[]>([]);
@@ -96,7 +98,9 @@ export class MemoPlay implements OnInit {
   };
 
   reset = () => {
-    if (this.correct() == this.cards().length / 2) {
+    // Using correct == 1 for testing purposes.
+    if (this.correct() == 1) {
+      // if (this.correct() == this.cards().length / 2) {
       this.complete();
       return;
     }
@@ -107,6 +111,10 @@ export class MemoPlay implements OnInit {
 
   complete = () => {
     this.completed.set(true);
+    const boardSize = this.amount == 8 ? "4x4" : "6x6";
+    if (this.authService.loggedIn()) {
+      this.service.saveResult({ moves: this.gameCounter(), boardSize: boardSize });
+    }
   };
 
   restart = () => {

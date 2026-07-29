@@ -40,7 +40,7 @@ namespace BrowserArcade.Api.Services
                         ));
                     ClaimsIdentity claims = new ClaimsIdentity(new Claim[]
                         {
-                            new Claim("userID", user.Id.ToString()),
+                            new Claim(ClaimTypes.NameIdentifier, user.Id)
                         });
 
                     SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor

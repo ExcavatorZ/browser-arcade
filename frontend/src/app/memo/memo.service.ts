@@ -1,4 +1,7 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { AuthService } from "../shared/auth-service";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment.development";
 
 interface pic {
   id?: number;
@@ -11,6 +14,9 @@ interface pic {
 })
 export class MemoService {
   private selectedBoardSize = 8;
+  private http = inject(HttpClient);
+  url = environment.apiBaseUrl + "/Memo/save";
+  service = inject(AuthService);
 
   private pics: pic[] = [
     { image: "assets/memo/angular.png", flipped: false },
@@ -64,4 +70,11 @@ export class MemoService {
 
     return this.shuffle(cardObjects);
   }
+
+  saveResult = (gameData: any) => {
+    this.http.post(this.url, { moves: gameData.moves, boardSize: gameData.boardSize }).subscribe({
+      next: () => {},
+      error: (err) => console.error(err),
+    });
+  };
 }
