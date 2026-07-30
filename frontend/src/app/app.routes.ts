@@ -14,6 +14,7 @@ import { QuizPlay } from "./quiz/quiz-play/quiz-play";
 import { MemoLeaderboard } from "./memo/memo-leaderboard/memo-leaderboard";
 import { QuizLeaderboard } from "./quiz/quiz-leaderboard/quiz-leaderboard";
 import { SnakeLeaderboard } from "./snake/snake-leaderboard/snake-leaderboard";
+import { InvaderLeaderboard } from "./invader/invader-leaderboard/invader-leaderboard";
 
 export const routes: Routes = [
   {
@@ -107,6 +108,11 @@ export const routes: Routes = [
       {
         path: "play",
         component: InvaderPlay,
+        title: "Server Invaders | Browser Arcade",
+      },
+      {
+        path: "leaderboard",
+        component: InvaderLeaderboard,
         title: "Server Invaders | Browser Arcade",
       },
     ],

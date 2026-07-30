@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using BrowserArcade.Api.Models;
 using BrowserArcade.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,13 @@ namespace BrowserArcade.Api.Controllers
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             _invaderService.SaveResult(score, userId);
             return Ok();
+        }
+
+        [HttpGet("leaderboard")]
+        public async Task<IEnumerable<InvaderGame>> GetInvaderLeaderboard()
+        {
+            IEnumerable<InvaderGame> result = _invaderService.GetLeaderboard();
+            return result; 
         }
     }
 }
