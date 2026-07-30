@@ -6,14 +6,14 @@
         (click)="applyFilter('4x4')"
         [class.bg-blue-600]="selectedFilter() == '4x4'"
         [class.bg-gray-600]="selectedFilter() != '4x4'"
-        class="cursor-pointer px-4 py-2 rounded text-neutral-200"
+        class="heading cursor-pointer px-4 py-2 rounded text-neutral-200"
         >4x4</a
       >
       <a
         (click)="applyFilter('6x6')"
         [class.bg-blue-600]="selectedFilter() == '6x6'"
         [class.bg-gray-600]="selectedFilter() != '6x6'"
-        class="cursor-pointer px-4 py-2 rounded text-neutral-200"
+        class="heading cursor-pointer px-4 py-2 rounded text-neutral-200"
         >6x6</a
       >
     </div>
@@ -23,9 +23,9 @@
     <table class="w-full border-separate border-spacing-y-2">
       <thead>
         <tr class="text-2xl text-neutral-200">
-          <th class="text-left px-4 py-2">Rank</th>
-          <th class="text-center px-4 py-2">Player</th>
-          <th class="text-right px-4 py-2">Moves</th>
+          <th class="heading text-left px-4 py-2">Rank</th>
+          <th class="heading text-center px-4 py-2">Player</th>
+          <th class="heading text-right px-4 py-2">Moves</th>
         </tr>
       </thead>
       <tbody>

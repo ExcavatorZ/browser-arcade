@@ -13,6 +13,18 @@ export interface QuizItem {
   difficulty: number;
 }
 
+export interface QuizLeaderboardItem {
+  id: number;
+  score: number;
+  totalQuestions: number;
+  difficulty: number;
+  timeTaken: number;
+  date: string;
+  user: {
+    userName: string;
+  };
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -44,5 +56,11 @@ export class QuizService {
         next: () => {},
         error: (err) => console.error(err),
       });
+  };
+
+  getLeaderboard = (totalQuestions: number, difficulty: number) => {
+    return this.http.get<QuizLeaderboardItem[]>(
+      `${this.url}/leaderboard?totalQuestions=${totalQuestions}&difficulty=${difficulty}`,
+    );
   };
 }

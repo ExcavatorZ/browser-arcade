@@ -18,19 +18,25 @@ public class QuizService
     }
 
     public void SaveResult(QuizGameDto quizGameDto, string userId)
+    {
+        QuizGame quizGame = new QuizGame
         {
-            QuizGame quizGame = new QuizGame
-            {
-                Score = quizGameDto.Score,
-                TotalQuestions = quizGameDto.TotalQuestions,
-                Difficulty = quizGameDto.Difficulty,
-                TimeTaken = quizGameDto.TimeTaken,
-                Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
-                UserId = userId,
-                User = _db.Users.Find(userId)!
-            };
+            Score = quizGameDto.Score,
+            TotalQuestions = quizGameDto.TotalQuestions,
+            Difficulty = quizGameDto.Difficulty,
+            TimeTaken = quizGameDto.TimeTaken,
+            Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
+            UserId = userId,
+            User = _db.Users.Find(userId)!
+        };
 
-            _db.QuizGames.Add(quizGame);
-            _db.SaveChanges();
-        }
+        _db.QuizGames.Add(quizGame);
+        _db.SaveChanges();
+    }
+
+    public IEnumerable<QuizGame> GetLeaderboard(int amount, int difficulty)
+    {
+        IEnumerable<QuizGame> quizGames = _db.QuizGames.Where(quiz => quiz.TotalQuestions == amount && quiz.Difficulty == difficulty).Include(q => q.User).AsEnumerable().GroupBy(q => q.UserId).Select(m => m.OrderByDescending(g => g.Score).First()).OrderByDescending(item => item.Score).ThenBy(g => g.TimeTaken).Take(10).ToList();
+        return quizGames;
+    }
 }

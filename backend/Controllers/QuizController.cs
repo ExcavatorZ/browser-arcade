@@ -30,5 +30,12 @@ namespace BrowserArcade.Api.Controllers
             _quizService.SaveResult(quizGameDto, userId);
             return Ok();
         }
+
+        [HttpGet("leaderboard")]
+        public async Task<IEnumerable<QuizGame>> GetQuizLeaderboard(int totalQuestions, int difficulty)
+        {
+            IEnumerable<QuizGame> result = _quizService.GetLeaderboard(totalQuestions, difficulty);
+            return result; 
+        }
     }
 }
