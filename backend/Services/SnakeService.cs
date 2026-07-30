@@ -1,4 +1,5 @@
 using BrowserArcade.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrowserArcade.Api.Services
 {
@@ -24,5 +25,10 @@ namespace BrowserArcade.Api.Services
             _db.SaveChanges();
         }
 
+        public IEnumerable<SnakeGame> GetLeaderboard()
+        {
+            IEnumerable<SnakeGame> snakeGames = _db.SnakeGames.Include(s => s.User).AsEnumerable().GroupBy(s => s.UserId).Select(m => m.OrderByDescending(g => g.Score).First()).OrderByDescending(item => item.Score).Take(10).ToList();
+            return snakeGames;
+        }
     }
 }

@@ -13,6 +13,7 @@ import { QuizInstruction } from "./quiz/quiz-instruction/quiz-instruction";
 import { QuizPlay } from "./quiz/quiz-play/quiz-play";
 import { MemoLeaderboard } from "./memo/memo-leaderboard/memo-leaderboard";
 import { QuizLeaderboard } from "./quiz/quiz-leaderboard/quiz-leaderboard";
+import { SnakeLeaderboard } from "./snake/snake-leaderboard/snake-leaderboard";
 
 export const routes: Routes = [
   {
@@ -86,6 +87,11 @@ export const routes: Routes = [
       {
         path: "play",
         component: SnakePlay,
+        title: "Debugger | Browser Arcade",
+      },
+      {
+        path: "leaderboard",
+        component: SnakeLeaderboard,
         title: "Debugger | Browser Arcade",
       },
     ],
