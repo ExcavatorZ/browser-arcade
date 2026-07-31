@@ -27,12 +27,21 @@
               >LOGIN</a
             >
           } @else if (service.loggedIn()) {
-            <button
-              (click)="openModal()"
-              class="heading cursor-pointer text-neutral-200 p-2 border border-gray-700 rounded-md bg-gray-700"
-            >
-              LOGOUT
-            </button>
+            <section class="space-x-2">
+              <a [routerLink]="['/profile', this.service.userName()]">
+                <button
+                  class="heading cursor-pointer text-neutral-200 p-2 border border-gray-700 rounded-md bg-gray-700"
+                >
+                  {{ this.service.userName() }}
+                </button></a
+              >
+              <button
+                (click)="openModal()"
+                class="heading cursor-pointer text-neutral-200 p-2 border border-gray-700 rounded-md bg-gray-700"
+              >
+                LOGOUT
+              </button>
+            </section>
           }
         </div>
       </section>

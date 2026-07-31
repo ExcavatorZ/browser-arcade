@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace BrowserArcade.Api.Services
 {
     
-    public class UserService(UserManager<User> userManager)
+    public class UserService(UserManager<User> userManager, AppDbContext db)
     {
         public async Task<IResult> CreateUser([FromBody] UserRegistrationModel userRegistrationModel)
         {
@@ -61,6 +61,12 @@ namespace BrowserArcade.Api.Services
                 {
                     return Results.BadRequest(new {message = "Email or password is incorrect."});
                 }
+        }
+
+        public string GetUserName(string userId)
+        {
+            User user = db.Users.Find(userId)!;
+            return user.UserName!;
         }
     }
 }

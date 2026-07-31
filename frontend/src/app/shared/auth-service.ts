@@ -18,8 +18,9 @@ export class AuthService {
   };
 
   saveToken = (token: string) => {
-    this.loggedIn.set(true);
     localStorage.setItem("token", token);
+    this.loggedIn.set(true);
+    this.loadUserName();
   };
 
   getToken = () => {
@@ -31,5 +32,19 @@ export class AuthService {
     localStorage.removeItem("token");
   };
 
+  getUserName = () => {
+    return this.http.get(`${this.url}/User/name`);
+  };
+
+  loadUserName = () => {
+    this.getUserName().subscribe({
+      next: (res: any) => {
+        this.userName.set(res);
+      },
+      error: (err) => console.log(err),
+    });
+  };
+
   loggedIn = signal(this.getToken() != null);
+  userName = signal("");
 }

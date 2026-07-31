@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using BrowserArcade.Api.DTOs;
 using BrowserArcade.Api.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,15 @@ namespace BrowserArcade.Api.Controllers
             IResult result = await _userService.LoginUser(request.Email, request.Password);
 
             return result;
+        }
+
+        [HttpGet("name")]
+        public JsonResult GetUserName()
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            string userName = _userService.GetUserName(userId);
+
+            return Json(userName);
         }
     }
 }

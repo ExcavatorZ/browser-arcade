@@ -15,6 +15,7 @@ import { MemoLeaderboard } from "./memo/memo-leaderboard/memo-leaderboard";
 import { QuizLeaderboard } from "./quiz/quiz-leaderboard/quiz-leaderboard";
 import { SnakeLeaderboard } from "./snake/snake-leaderboard/snake-leaderboard";
 import { InvaderLeaderboard } from "./invader/invader-leaderboard/invader-leaderboard";
+import { ProfileOverview } from "./profile/profile-overview/profile-overview";
 
 export const routes: Routes = [
   {
@@ -36,6 +37,11 @@ export const routes: Routes = [
     path: "signup",
     component: Signup,
     title: "Sign up | Browser Arcade",
+  },
+  {
+    path: "profile/:userName",
+    component: ProfileOverview,
+    title: "Profile | Browser Arcade",
   },
   {
     path: "memo",
