@@ -1,13 +1,23 @@
 <div class="text-center bg-indigo-950 min-h-screen pt-10">
   <h1 class="text-4xl mb-5 text-neutral-200">{{ this.authService.userName() }}'s overview</h1>
   <section class="bg-indigo-900 max-w-3xl mx-auto rounded-lg shadow-lg p-6">
-    <p class="text-2xl mb-5 text-neutral-300 font-sans">Memory games played: 0</p>
-    <p class="text-2xl mb-5 text-neutral-300 font-sans">Quizzes played: 0</p>
-    <p class="text-2xl mb-5 text-neutral-300 font-sans">Debuggers played: 0</p>
-    <p class="text-2xl mb-5 text-neutral-300 font-sans">Server defenders played: 0</p>
-    <a
-      class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
-      >Details</a
-    >
+    @if (overview(); as profile) {
+      <p class="text-2xl mb-5 text-neutral-300 font-sans">
+        Memory games played: {{ profile.memoryGames }}
+      </p>
+      <p class="text-2xl mb-5 text-neutral-300 font-sans">
+        Quizzes played: {{ profile.quizGames }}
+      </p>
+      <p class="text-2xl mb-5 text-neutral-300 font-sans">
+        Debuggers played: {{ profile.snakeGames }}
+      </p>
+      <p class="text-2xl mb-5 text-neutral-300 font-sans">
+        Server defenders played: {{ profile.invaderGames }}
+      </p>
+      <a
+        class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+        >Details</a
+      >
+    }
   </section>
 </div>
