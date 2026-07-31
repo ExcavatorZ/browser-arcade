@@ -1,6 +1,7 @@
 import { Component, signal, HostListener, inject } from "@angular/core";
 import { InvaderService } from "../invader.service";
 import { AuthService } from "../../shared/auth-service";
+import { RouterLink } from "@angular/router";
 
 interface enemy {
   x: number;
@@ -15,7 +16,7 @@ interface projectile {
 
 @Component({
   selector: "app-invader-play",
-  imports: [],
+  imports: [RouterLink],
   templateUrl: "./invader-play.html",
   styleUrl: "./invader-play.css",
 })

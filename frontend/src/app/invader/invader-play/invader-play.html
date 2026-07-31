@@ -39,14 +39,23 @@
         Server compromised! You blocked {{ score() }} malware.
       </p>
       <section class="flex flex-col items-center">
-        <button
-          (click)="restart()"
-          class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
-        >
-          Restart
-        </button>
+        <div class="flex justify-center gap-2">
+          <button
+            (click)="restart()"
+            class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+          >
+            Restart
+          </button>
 
+          <a
+            routerLink="/invader/leaderboard"
+            class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
+          >
+            Leaderboard
+          </a>
+        </div>
         <a
+          routerLink="/games"
           class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
         >
           Back to game list

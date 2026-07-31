@@ -1,10 +1,11 @@
 import { Component, inject, signal, HostListener, OnInit } from "@angular/core";
 import { SnakeService } from "../snake.service";
 import { AuthService } from "../../shared/auth-service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-snake-play",
-  imports: [],
+  imports: [RouterLink],
   templateUrl: "./snake-play.html",
   styleUrl: "./snake-play.css",
 })
