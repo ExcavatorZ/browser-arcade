@@ -30,11 +30,11 @@ export class ProfileService {
   private http = inject(HttpClient);
   url = environment.apiBaseUrl + "/profile";
 
-  getProfileOverview = () => {
-    return this.http.get<ProfileInfo>(`${this.url}/overview`);
+  getProfileOverview = (userName: string) => {
+    return this.http.get<ProfileInfo>(`${this.url}/overview/${userName}`);
   };
 
-  getProfileDetails = () => {
-    return this.http.get<ProfileDetailInfo>(`${this.url}/details`);
+  getProfileDetails = (userName: string) => {
+    return this.http.get<ProfileDetailInfo>(`${this.url}/details/${userName}`);
   };
 }

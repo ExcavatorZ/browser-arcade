@@ -1,9 +1,10 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
 import { MemoLeaderboardItem, MemoService } from "../memo.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-memo-leaderboard",
-  imports: [],
+  imports: [RouterLink],
   templateUrl: "./memo-leaderboard.html",
 })
 export class MemoLeaderboard implements OnInit {

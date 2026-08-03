@@ -15,9 +15,11 @@
           <tr class="bg-indigo-800/60 font-sans text-neutral-300">
             <td class="text-left px-4 py-2">{{ i + 1 }}</td>
             <td class="text-center px-4 py-2">
-              <a class="cursor-pointer hover:text-white hover:underline">{{
-                entry.user.userName
-              }}</a>
+              <a
+                [routerLink]="['/profile', entry.user.userName]"
+                class="cursor-pointer hover:text-white hover:underline"
+                >{{ entry.user.userName }}</a
+              >
             </td>
             <td class="text-right px-4 py-2">{{ entry.score }}</td>
           </tr>

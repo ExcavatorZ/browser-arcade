@@ -1,10 +1,11 @@
 import { Component, inject, signal } from "@angular/core";
 import { InvaderService } from "../invader.service";
 import { SnakeLeaderboardItem } from "../../snake/snake.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-invader-leaderboard",
-  imports: [],
+  imports: [RouterLink],
   templateUrl: "./invader-leaderboard.html",
 })
 export class InvaderLeaderboard {

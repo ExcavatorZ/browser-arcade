@@ -1,9 +1,10 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
 import { QuizLeaderboardItem, QuizService } from "../quiz.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-quiz-leaderboard",
-  imports: [],
+  imports: [RouterLink],
   templateUrl: "./quiz-leaderboard.html",
 })
 export class QuizLeaderboard implements OnInit {

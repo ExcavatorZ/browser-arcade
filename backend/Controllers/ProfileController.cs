@@ -1,6 +1,8 @@
 using System.Security.Claims;
 using BrowserArcade.Api.DTOs;
+using BrowserArcade.Api.Models;
 using BrowserArcade.Api.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BrowserArcade.Api.Controllers
@@ -10,47 +12,58 @@ namespace BrowserArcade.Api.Controllers
     public class ProfileController : ControllerBase
     {
         private readonly ProfileService _profileService;
-        public ProfileController(ProfileService service)
+        private readonly UserManager<User> _userManager;
+        public ProfileController(ProfileService service, UserManager<User> manager)
         {
             _profileService = service;
+            _userManager = manager;
         }
 
-        [HttpGet("overview")]
-        public ProfileOverviewDto GetProfileOverview()
+        [HttpGet("overview/{userName}")]
+        public async Task<ActionResult<ProfileOverviewDto>> GetProfileOverview(string userName)
         {
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            User? user = await _userManager.FindByNameAsync(userName);
+            
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             ProfileOverviewDto overView = new ProfileOverviewDto
             {
-                QuizGames = _profileService.GetQuizGames(userId),
-                MemoryGames = _profileService.GetMemoryGames(userId),
-                SnakeGames = _profileService.GetSnakeGames(userId),
-                InvaderGames = _profileService.GetInvaderGames(userId)
+                QuizGames = _profileService.GetQuizGames(user.Id),
+                MemoryGames = _profileService.GetMemoryGames(user.Id),
+                SnakeGames = _profileService.GetSnakeGames(user.Id),
+                InvaderGames = _profileService.GetInvaderGames(user.Id)
 
             };
 
             return overView;
         }
 
-        [HttpGet("details")]
-        public ProfileDetailsDto GetProfileDetails()
+        [HttpGet("details/{userName}")]
+        public async Task<ActionResult<ProfileDetailsDto>> GetProfileDetails(string userName)
         {
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            User? user = await _userManager.FindByNameAsync(userName);
+            
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             ProfileDetailsDto details = new ProfileDetailsDto
             {
-                QuizGames = _profileService.GetQuizGames(userId),
-                MemoryGames = _profileService.GetMemoryGames(userId),
-                SnakeGames = _profileService.GetSnakeGames(userId),
-                InvaderGames = _profileService.GetInvaderGames(userId),
-                CommonMemoSize = _profileService.GetCommonMemoSize(userId),
-                CommonQuizLength = _profileService.GetCommonQuizLength(userId),
-                CommonQuizDifficulty = _profileService.GetCommonQuizDifficulty(userId),
-                CommonSnakeScore = _profileService.GetCommonSnakeScore(userId),
-                SnakeHighScore = _profileService.GetSnakeHighScore(userId),
-                CommonInvaderScore = _profileService.GetCommonInvaderScore(userId),
-                InvaderHighScore = _profileService.GetInvaderHighScore(userId)
-
+                QuizGames = _profileService.GetQuizGames(user.Id),
+                MemoryGames = _profileService.GetMemoryGames(user.Id),
+                SnakeGames = _profileService.GetSnakeGames(user.Id),
+                InvaderGames = _profileService.GetInvaderGames(user.Id),
+                CommonMemoSize = _profileService.GetCommonMemoSize(user.Id),
+                CommonQuizLength = _profileService.GetCommonQuizLength(user.Id),
+                CommonQuizDifficulty = _profileService.GetCommonQuizDifficulty(user.Id),
+                CommonSnakeScore = _profileService.GetCommonSnakeScore(user.Id),
+                SnakeHighScore = _profileService.GetSnakeHighScore(user.Id),
+                CommonInvaderScore = _profileService.GetCommonInvaderScore(user.Id),
+                InvaderHighScore = _profileService.GetInvaderHighScore(user.Id)
             };
 
             return details;
