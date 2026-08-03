@@ -1,10 +1,11 @@
 import { Component, inject, OnInit, signal } from "@angular/core";
 import { AuthService } from "../../shared/auth-service";
 import { ProfileInfo, ProfileService } from "../profile.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-profile-overview",
-  imports: [],
+  imports: [RouterLink],
   templateUrl: "./profile-overview.html",
 })
 export class ProfileOverview implements OnInit {

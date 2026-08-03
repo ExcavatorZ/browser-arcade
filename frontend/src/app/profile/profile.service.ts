@@ -9,6 +9,20 @@ export interface ProfileInfo {
   invaderGames: number;
 }
 
+export interface ProfileDetailInfo {
+  quizGames: number;
+  memoryGames: number;
+  snakeGames: number;
+  invaderGames: number;
+  commonMemoSize: string;
+  commonQuizLength: number;
+  commonQuizDifficulty: number;
+  commonSnakeScore: number;
+  snakeHighScore: number;
+  commonInvaderScore: number;
+  invaderHighScore: number;
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -18,5 +32,9 @@ export class ProfileService {
 
   getProfileOverview = () => {
     return this.http.get<ProfileInfo>(`${this.url}/overview`);
+  };
+
+  getProfileDetails = () => {
+    return this.http.get<ProfileDetailInfo>(`${this.url}/details`);
   };
 }

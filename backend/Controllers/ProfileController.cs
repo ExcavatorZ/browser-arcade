@@ -31,5 +31,29 @@ namespace BrowserArcade.Api.Controllers
 
             return overView;
         }
+
+        [HttpGet("details")]
+        public ProfileDetailsDto GetProfileDetails()
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+            ProfileDetailsDto details = new ProfileDetailsDto
+            {
+                QuizGames = _profileService.GetQuizGames(userId),
+                MemoryGames = _profileService.GetMemoryGames(userId),
+                SnakeGames = _profileService.GetSnakeGames(userId),
+                InvaderGames = _profileService.GetInvaderGames(userId),
+                CommonMemoSize = _profileService.GetCommonMemoSize(userId),
+                CommonQuizLength = _profileService.GetCommonQuizLength(userId),
+                CommonQuizDifficulty = _profileService.GetCommonQuizDifficulty(userId),
+                CommonSnakeScore = _profileService.GetCommonSnakeScore(userId),
+                SnakeHighScore = _profileService.GetSnakeHighScore(userId),
+                CommonInvaderScore = _profileService.GetCommonInvaderScore(userId),
+                InvaderHighScore = _profileService.GetInvaderHighScore(userId)
+
+            };
+
+            return details;
+        }
     }
 }

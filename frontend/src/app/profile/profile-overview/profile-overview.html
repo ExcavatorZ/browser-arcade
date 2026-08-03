@@ -15,6 +15,7 @@
         Server defenders played: {{ profile.invaderGames }}
       </p>
       <a
+        [routerLink]="['/details', this.authService.userName()]"
         class="heading px-4 py-2 mt-4 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 cursor-pointer"
         >Details</a
       >

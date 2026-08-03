@@ -16,6 +16,7 @@ import { QuizLeaderboard } from "./quiz/quiz-leaderboard/quiz-leaderboard";
 import { SnakeLeaderboard } from "./snake/snake-leaderboard/snake-leaderboard";
 import { InvaderLeaderboard } from "./invader/invader-leaderboard/invader-leaderboard";
 import { ProfileOverview } from "./profile/profile-overview/profile-overview";
+import { ProfileDetails } from "./profile/profile-details/profile-details";
 
 export const routes: Routes = [
   {
@@ -42,6 +43,11 @@ export const routes: Routes = [
     path: "profile/:userName",
     component: ProfileOverview,
     title: "Profile | Browser Arcade",
+  },
+  {
+    path: "details/:userName",
+    component: ProfileDetails,
+    title: "Details | Browser Arcade",
   },
   {
     path: "memo",
