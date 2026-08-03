@@ -1,7 +1,7 @@
-using System.Security.Claims;
 using BrowserArcade.Api.DTOs;
 using BrowserArcade.Api.Models;
 using BrowserArcade.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +19,7 @@ namespace BrowserArcade.Api.Controllers
             _userManager = manager;
         }
 
+        [Authorize]
         [HttpGet("overview/{userName}")]
         public async Task<ActionResult<ProfileOverviewDto>> GetProfileOverview(string userName)
         {
@@ -41,6 +42,7 @@ namespace BrowserArcade.Api.Controllers
             return overView;
         }
 
+        [Authorize]
         [HttpGet("details/{userName}")]
         public async Task<ActionResult<ProfileDetailsDto>> GetProfileDetails(string userName)
         {

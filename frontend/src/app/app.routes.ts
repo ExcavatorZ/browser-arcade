@@ -17,6 +17,8 @@ import { SnakeLeaderboard } from "./snake/snake-leaderboard/snake-leaderboard";
 import { InvaderLeaderboard } from "./invader/invader-leaderboard/invader-leaderboard";
 import { ProfileOverview } from "./profile/profile-overview/profile-overview";
 import { ProfileDetails } from "./profile/profile-details/profile-details";
+import { Unauthorized } from "./shared/unauthorized/unauthorized";
+import { authGuard } from "./shared/auth-guard";
 
 export const routes: Routes = [
   {
@@ -43,11 +45,18 @@ export const routes: Routes = [
     path: "profile/:userName",
     component: ProfileOverview,
     title: "Profile | Browser Arcade",
+    canActivate: [authGuard],
   },
   {
     path: "details/:userName",
     component: ProfileDetails,
     title: "Details | Browser Arcade",
+    canActivate: [authGuard],
+  },
+  {
+    path: "unauthorized",
+    component: Unauthorized,
+    title: "Unauthorized | Browser Arcade",
   },
   {
     path: "memo",
