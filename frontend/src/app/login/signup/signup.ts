@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AuthService } from "../../shared/auth-service";
 import { Router } from "@angular/router";
@@ -9,7 +9,7 @@ import { switchMap } from "rxjs";
   imports: [ReactiveFormsModule],
   templateUrl: "./signup.html",
 })
-export class Signup {
+export class Signup implements OnInit {
   formBuilder = inject(FormBuilder);
   service = inject(AuthService);
   router = inject(Router);
@@ -38,6 +38,12 @@ export class Signup {
     },
     { validators: this.passwordMatchValidator },
   );
+
+  ngOnInit(): void {
+    if (this.service.loggedIn()) {
+      this.router.navigateByUrl("/");
+    }
+  }
 
   onSubmit = () => {
     this.isSubmitted = true;

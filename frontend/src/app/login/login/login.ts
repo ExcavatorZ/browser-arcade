@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../shared/auth-service";
@@ -8,7 +8,7 @@ import { AuthService } from "../../shared/auth-service";
   imports: [RouterLink, ReactiveFormsModule],
   templateUrl: "./login.html",
 })
-export class Login {
+export class Login implements OnInit {
   formBuilder = inject(FormBuilder);
   service = inject(AuthService);
   router = inject(Router);
@@ -17,6 +17,12 @@ export class Login {
     email: [""],
     password: [""],
   });
+
+  ngOnInit(): void {
+    if (this.service.loggedIn()) {
+      this.router.navigateByUrl("/");
+    }
+  }
 
   onSubmit = () => {
     this.service.loginUser(this.form.value).subscribe({
