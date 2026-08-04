@@ -12,7 +12,8 @@
         />
         <span
           class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded empty:hidden"
-        ></span>
+          >{{ notFoundErrorMessage() }}</span
+        >
       </div>
       <div class="flex flex-col items-center justify-center mt-4">
         <label class="text-2xl font-sans text-neutral-300">Password</label>
@@ -23,7 +24,8 @@
         />
         <span
           class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded empty:hidden"
-        ></span>
+          >{{ passwordErrorMessage() }}</span
+        >
       </div>
       <button
         type="submit"

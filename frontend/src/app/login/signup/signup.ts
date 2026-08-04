@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { AuthService } from "../../shared/auth-service";
 import { Router } from "@angular/router";
@@ -14,6 +14,8 @@ export class Signup implements OnInit {
   service = inject(AuthService);
   router = inject(Router);
   isSubmitted = false;
+
+  errorResponse = signal<any>(null);
 
   passwordMatchValidator = (control: AbstractControl) => {
     const password = control.get("password");
@@ -46,9 +48,8 @@ export class Signup implements OnInit {
   }
 
   onSubmit = () => {
-    this.isSubmitted = true;
-
     if (this.form.valid) {
+      this.isSubmitted = true;
       this.service
         .createUser(this.form.value)
         .pipe(switchMap(() => this.service.loginUser(this.form.value)))
@@ -59,7 +60,7 @@ export class Signup implements OnInit {
             this.router.navigateByUrl("/");
           },
           error: (err) => {
-            console.error(err);
+            this.errorResponse.set(err.error);
           },
         });
     }

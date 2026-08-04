@@ -11,6 +11,7 @@
           formControlName="userName"
           type="text"
           class="heading border border-2-black p-1 bg-indigo-100 rounded"
+          maxlength="20"
         />
         <span id="nameSpan" class="text-sm font-sans text-gray-400"
           >{{ form.controls.userName.value!.length }} / 20</span
@@ -25,6 +26,10 @@
               Username must be at least 5 characters.
             </aside>
           }
+        } @else if (errorResponse()!.errors[0].code == "DuplicateUserName") {
+          <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+            Username is already taken.
+          </aside>
         }
       </div>
       <div class="flex flex-col items-center justify-center mt-4">
@@ -44,6 +49,12 @@
               Email address must be valid.
             </aside>
           }
+        } @else if (
+          errorResponse()!.errors[errorResponse().errors.length - 1].code == "DuplicateEmail"
+        ) {
+          <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
+            Email is already taken.
+          </aside>
         }
       </div>
       <div class="flex flex-col items-center justify-center mt-4">

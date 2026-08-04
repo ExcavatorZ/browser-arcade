@@ -34,33 +34,36 @@ namespace BrowserArcade.Api.Services
         public async Task<IResult> LoginUser([FromBody] string email, string password)
         {
             User? user = await userManager.FindByEmailAsync(email);
-                if (user != null && await userManager.CheckPasswordAsync(user, password))
-                {
-                    SymmetricSecurityKey signInKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                        "TemporarySecretKeyContaining32+Characters"
-                        ));
-                    ClaimsIdentity claims = new ClaimsIdentity(new Claim[]
-                        {
-                            new Claim(ClaimTypes.NameIdentifier, user.Id)
-                        });
-
-                    SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            if (user != null && await userManager.CheckPasswordAsync(user, password))
+            {
+                SymmetricSecurityKey signInKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                    "TemporarySecretKeyContaining32+Characters"
+                    ));
+                ClaimsIdentity claims = new ClaimsIdentity(new Claim[]
                     {
-                        Subject = claims,
-                        Expires = DateTime.UtcNow.AddDays(1),
-                        SigningCredentials = new SigningCredentials(
-                            signInKey, SecurityAlgorithms.HmacSha256Signature
-                        )
-                    };
-                    JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-                    SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                    string token = tokenHandler.WriteToken(securityToken);
-                    return Results.Ok(new {token});
-                }
-                else
+                        new Claim(ClaimTypes.NameIdentifier, user.Id)
+                    });
+
+                SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    return Results.BadRequest(new {message = "Email or password is incorrect."});
-                }
+                    Subject = claims,
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(
+                        signInKey, SecurityAlgorithms.HmacSha256Signature
+                    )
+                };
+                JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+                SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                string token = tokenHandler.WriteToken(securityToken);
+                return Results.Ok(new {token});
+            }
+            else if (user == null)
+            {
+                return Results.NotFound(new {message = "Email not registered."});
+            } else
+            {
+                return Results.BadRequest(new {message = "Incorrect password."});
+            }
         }
 
         public string GetUserName(string userId)
