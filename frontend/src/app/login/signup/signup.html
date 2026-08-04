@@ -16,7 +16,7 @@
         <span id="nameSpan" class="text-sm font-sans text-gray-400"
           >{{ form.controls.userName.value!.length }} / 20</span
         >
-        @if (hasDisplayableError("userName")) {
+        @if (hasUserError("userName")) {
           @if (form.controls.userName.hasError("required")) {
             <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
               Please enter a username.
@@ -26,7 +26,7 @@
               Username must be at least 5 characters.
             </aside>
           }
-        } @else if (errorResponse()!.errors[0].code == "DuplicateUserName") {
+        } @else if (hasDuplicateError("DuplicateUserName")) {
           <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
             Username is already taken.
           </aside>
@@ -39,7 +39,7 @@
           type="email"
           class="heading border border-2-black p-1 bg-indigo-100 rounded"
         />
-        @if (hasDisplayableError("email")) {
+        @if (hasUserError("email")) {
           @if (form.controls.email.hasError("required")) {
             <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
               Please enter an email address.
@@ -49,9 +49,7 @@
               Email address must be valid.
             </aside>
           }
-        } @else if (
-          errorResponse()!.errors[errorResponse().errors.length - 1].code == "DuplicateEmail"
-        ) {
+        } @else if (hasDuplicateError("DuplicateEmail")) {
           <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
             Email is already taken.
           </aside>
@@ -66,7 +64,7 @@
           type="password"
           class="heading border border-black p-1 bg-indigo-100 rounded"
         />
-        @if (hasDisplayableError("password")) {
+        @if (hasUserError("password")) {
           @if (form.controls.password.hasError("required")) {
             <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
               Please enter a password.
@@ -89,7 +87,7 @@
           type="password"
           class="heading border border-black p-1 bg-indigo-100 rounded"
         />
-        @if (hasDisplayableError("confirm")) {
+        @if (hasUserError("confirm")) {
           <aside class="mt-2 text-sm font-sans text-red-400 bg-red-900/30 px-2 py-1 rounded">
             Password and confirm must match
           </aside>

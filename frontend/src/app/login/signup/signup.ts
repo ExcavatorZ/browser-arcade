@@ -4,6 +4,16 @@ import { AuthService } from "../../shared/auth-service";
 import { Router } from "@angular/router";
 import { switchMap } from "rxjs";
 
+interface IdentityError {
+  code: string;
+  description: string;
+}
+
+interface ErrorResponse {
+  succeeded: boolean;
+  errors: IdentityError[];
+}
+
 @Component({
   selector: "app-signup",
   imports: [ReactiveFormsModule],
@@ -15,7 +25,7 @@ export class Signup implements OnInit {
   router = inject(Router);
   isSubmitted = false;
 
-  errorResponse = signal<any>(null);
+  errorResponse = signal<ErrorResponse | null>(null);
 
   passwordMatchValidator = (control: AbstractControl) => {
     const password = control.get("password");
@@ -66,8 +76,22 @@ export class Signup implements OnInit {
     }
   };
 
-  hasDisplayableError = (controlName: string) => {
+  hasUserError = (controlName: string) => {
     const control = this.form.get(controlName);
     return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched));
+  };
+
+  hasDuplicateError = (code: string) => {
+    if (!this.errorResponse()) {
+      return false;
+    }
+
+    for (const error of this.errorResponse()!.errors) {
+      if (error.code == code) {
+        return true;
+      }
+    }
+
+    return false;
   };
 }
