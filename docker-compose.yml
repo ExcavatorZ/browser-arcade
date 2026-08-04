@@ -1,0 +1,28 @@
+services:
+  backend:
+    image: browser-arcade-aspnet
+    build: backend/
+    ports:
+      - "5245:5245"
+    env_file:
+      - backend/.env
+  frontend:
+    image: browser-arcade-angular
+    build: frontend/
+    ports:
+      - "4200:80"
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    restart: unless-stopped
+    volumes:
+      - browser-arcade-data:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=browserarcade
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - 5433:5432
+
+volumes:
+  browser-arcade-data:
