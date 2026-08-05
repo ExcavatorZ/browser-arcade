@@ -1,13 +1,13 @@
 services:
   backend:
-    image: browser-arcade-aspnet
+    image: excavatorz/browser-arcade-backend:latest
     build: backend/
     ports:
       - "5245:5245"
     env_file:
       - backend/.env
   frontend:
-    image: browser-arcade-angular
+    image: excavatorz/browser-arcade-frontend:latest
     build: frontend/
     ports:
       - "4200:80"
