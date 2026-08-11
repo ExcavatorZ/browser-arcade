@@ -16,7 +16,9 @@ describe("Homepage", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  it("should render the body text", () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.textContent).toContain("Welcome to Browser Arcade!");
   });
 });

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter } from "@angular/router";
 
 import { Header } from "./header";
 
@@ -9,6 +10,7 @@ describe("Header", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);
@@ -16,7 +18,9 @@ describe("Header", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  it("should render the header text", () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.textContent).toContain("GAME LIST");
   });
 });

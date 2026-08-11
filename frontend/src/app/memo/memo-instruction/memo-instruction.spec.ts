@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter } from "@angular/router";
 
 import { MemoInstruction } from "./memo-instruction";
 
@@ -9,6 +10,7 @@ describe("MemoInstruction", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MemoInstruction],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MemoInstruction);
@@ -16,7 +18,9 @@ describe("MemoInstruction", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  it("should render the memo instruction text", () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.textContent).toContain("Click on a square");
   });
 });

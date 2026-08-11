@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter } from "@angular/router";
 
 import { InvaderInstruction } from "./invader-instruction";
 
@@ -9,6 +10,7 @@ describe("InvaderInstruction", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [InvaderInstruction],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(InvaderInstruction);
@@ -16,7 +18,9 @@ describe("InvaderInstruction", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  it("should render the invader instruction text", () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.textContent).toContain("Move around as a firewall");
   });
 });
