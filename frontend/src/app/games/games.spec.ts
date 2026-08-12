@@ -18,7 +18,8 @@ describe("Games", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  it("should render 4 game instances", () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelectorAll("h3").length).toBe(4);
   });
 });

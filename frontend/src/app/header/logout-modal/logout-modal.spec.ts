@@ -16,7 +16,9 @@ describe("LogoutModal", () => {
     await fixture.whenStable();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  it("should render the logout modal text", () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.textContent).toContain("Log out?");
   });
 });
