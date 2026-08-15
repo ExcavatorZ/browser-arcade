@@ -13,6 +13,8 @@ yarn-error.log
 # Backend
 /backend/obj
 /backend/bin
+/backend.Tests/obj
+/backend.Tests/bin
 
 # IDEs and editors
 .idea/
