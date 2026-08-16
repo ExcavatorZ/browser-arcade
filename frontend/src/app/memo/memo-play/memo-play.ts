@@ -98,9 +98,7 @@ export class MemoPlay implements OnInit {
   };
 
   reset = () => {
-    // Using correct == 1 for testing purposes.
-    if (this.correct() == 1) {
-      // if (this.correct() == this.cards().length / 2) {
+    if (this.correct() == this.cards().length / 2) {
       this.complete();
       return;
     }
