@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "serve": "cd frontend && ng serve",
+    "test": "cd frontend && ng test",
+    "install": "cd frontend && npm install"
+  }
+}

@@ -13,7 +13,25 @@
 
 Personal full-stack web application containing several browser games, user authentication, score tracking and profile statistics. The project is built with Angular, ASP.NET Web API and PostgreSQL, and can be run locally using Docker.
 
+## Installing dependencies
+
+Every command can be run in the root directory.
+
+### Frontend:
+
+Install the frontend dependencies:
+
+`npm run install`
+
+### Backend:
+
+Restore the backend dependencies:
+
+`dotnet restore`
+
 ## Running instructions
+
+Every command can be run in the root directory.
 
 ### Docker 🐋:
 
@@ -37,18 +55,26 @@ Stop all services:
 
 #### Frontend:
 
-```bash
-cd frontend
-ng serve
-```
+`npm run serve`
 
 #### Backend:
 
-```bash
-cd backend
-dotnet run
-```
+`dotnet run --project backend`
+
+For hot reloads, add the watch flag:
+
+`dotnet watch run --project backend`
 
 ## Testing
 
-Automated testing is planned for development.
+#### Frontend:
+
+Run the frontend tests using the Vitest test runner:
+
+`npm run test`
+
+#### Backend:
+
+Run the backend tests using xUnit:
+
+`dotnet test`
