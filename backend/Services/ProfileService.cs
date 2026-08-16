@@ -115,56 +115,56 @@ namespace BrowserArcade.Api.Services
                 return "No games played.";
             }
 
-            var result = _db.SnakeGames.Where(snake => snake.UserId == id).OrderByDescending(s => s.Score).First();
+            SnakeGame result = _db.SnakeGames.Where(snake => snake.UserId == id).OrderByDescending(s => s.Score).First();
 
             return result.Score.ToString();
         }
         public string GetCommonSnakeScore(string id)
         {
-            if (_db.SnakeGames.Where(snake => snake.UserId == id).ToList().Count < 1)
+            List<SnakeGame> allGames = _db.SnakeGames.Where(snake => snake.UserId == id).ToList();
+
+            if (allGames.Count < 1)
             {
                 return "No games played.";
             }
 
-            var allGames = _db.SnakeGames.Where(snake => snake.UserId == id);
-
             int counter = 0;
 
-            for (int i = 0; i < allGames.Count(); i++)
+            for (int i = 0; i < allGames.Count; i++)
             {
-                counter += allGames.ElementAt(i).Score;
+                counter += allGames[i].Score;
             }
 
-            return (counter / allGames.Count()).ToString();
+            return (counter / allGames.Count).ToString();
         }
         public string GetInvaderHighScore(string id)
         {
             if (_db.InvaderGames.Where(invader => invader.UserId == id).ToList().Count < 1)
             {
-                return "No games played";
+                return "No games played.";
             }
 
-            var result = _db.InvaderGames.Where(invader => invader.UserId == id).OrderByDescending(s => s.Score).First();
+            InvaderGame result = _db.InvaderGames.Where(invader => invader.UserId == id).OrderByDescending(s => s.Score).First();
 
             return result.Score.ToString();
         }
         public string GetCommonInvaderScore(string id)
         {
-            if (_db.InvaderGames.Where(invader => invader.UserId == id).ToList().Count < 1)
+            List<InvaderGame> allGames = _db.InvaderGames.Where(invader => invader.UserId == id).ToList();
+
+            if (allGames.Count < 1)
             {
                 return "No games played.";
-            }
-
-            var allGames = _db.InvaderGames.Where(invader => invader.UserId == id);
+            }            
 
             int counter = 0;
 
-            for (int i = 0; i < allGames.Count(); i++)
+            for (int i = 0; i < allGames.Count; i++)
             {
-                counter += allGames.ElementAt(i).Score;
+                counter += allGames[i].Score;
             }
 
-            return (counter / allGames.Count()).ToString();
+            return (counter / allGames.Count).ToString();
         }
     }
 }
