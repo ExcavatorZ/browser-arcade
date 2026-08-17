@@ -1,0 +1,9 @@
+<div class="flex justify-center">
+  <section class="bg-indigo-900 px-4 py-4 rounded-lg shadow-lg w-50 md:w-100">
+    @for (image of [currentImage()]; track $index) {
+      <p class="heading text-4xl text-neutral-200 h-40 md:h-80 object-contain fade">
+        {{ image.title }}
+      </p>
+    }
+  </section>
+</div>
