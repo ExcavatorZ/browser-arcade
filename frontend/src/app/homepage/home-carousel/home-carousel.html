@@ -1,9 +1,24 @@
 <div class="flex justify-center">
-  <section class="bg-indigo-900 px-4 py-4 rounded-lg shadow-lg w-50 md:w-100">
-    @for (image of [currentImage()]; track $index) {
-      <p class="heading text-4xl text-neutral-200 h-40 md:h-80 object-contain fade">
-        {{ image.title }}
-      </p>
+  <section class="bg-indigo-900 px-4 py-4 rounded-lg shadow-lg w-72 md:w-lg">
+    @for (image of [currentImage()]; track image.id) {
+      <div class="h-40 md:h-80">
+        <p class="heading text-4xl text-neutral-200">{{ image.title }}</p>
+        <section class="relative flex justify-center items-center mt-8 h-60">
+          <button
+            (click)="prevImage()"
+            class="absolute left-0 bg-indigo-950/70 text-neutral-200 text-3xl w-10 h-10 rounded-full hover:bg-indigo-950 cursor-pointer flex items-center justify-center"
+          >
+            <span class="-translate-y-1">‹</span>
+          </button>
+          <img [src]="image.path" class="w-full max-w-96 h-60 object-contain fade" />
+          <button
+            (click)="nextImage()"
+            class="absolute right-0 bg-indigo-950/70 text-neutral-200 text-3xl w-10 h-10 rounded-full hover:bg-indigo-950 cursor-pointer flex items-center justify-center"
+          >
+            <span class="-translate-y-1">›</span>
+          </button>
+        </section>
+      </div>
     }
   </section>
 </div>
